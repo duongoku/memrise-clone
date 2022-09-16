@@ -13,12 +13,6 @@ packages/flame/doc/api/
 **/.flutter-plugins-dependencies
 **/pubspec_overrides.yaml
 
-android/
-linux/
-windows/
-macos/
-web/
-ios/
 desktop/
 build/
 _build/
