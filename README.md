@@ -6,6 +6,8 @@ A flutter app for class INT3120 40
   - [💿Prerequisites](#prerequisites)
   - [🏃Run](#run)
   - [📷Preview](#preview)
+    - [Week 1](#week-1)
+    - [Week 2](#week-2)
   - [📢Releases](#releases)
 
 ## 👪Members
@@ -24,7 +26,12 @@ flutter run
 ```
 
 ## 📷Preview
-![demo](/preview/demo_preview.png)
+
+### Week 1
+![demo_week1](/preview/demo_preview.png)
+
+### Week 2
+![demo_week2](/preview/demo_week2.mp4)
 
 ## 📢Releases
 - Checkout [releases](https://github.com/duongoku/random-flutter/releases)

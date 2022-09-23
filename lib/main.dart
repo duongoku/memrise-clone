@@ -10,10 +10,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Week 2 Demo',
+      title: 'Week 2 Demo Group 9',
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Week 2 Demo'),
+          title: const Text('Week 2 Demo Group 9'),
         ),
         body: const Center(
           child: DemoStatefulWidget(),
