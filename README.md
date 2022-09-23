@@ -1,4 +1,5 @@
 # ⚡random-flutter
+
 A flutter app for class INT3120 40
 
 - [⚡random-flutter](#random-flutter)
@@ -11,13 +12,16 @@ A flutter app for class INT3120 40
   - [📢Releases](#releases)
 
 ## 👪Members
-- 19020060 - Nguyễn Vũ Bình Dương
-- 19020095 - Nguyễn Hùng Dũng
+
+-   19020060 - Nguyễn Vũ Bình Dương
+-   19020095 - Nguyễn Hùng Dũng
 
 ## 💿Prerequisites
-- [flutter](https://docs.flutter.dev/get-started/install)
+
+-   [flutter](https://docs.flutter.dev/get-started/install)
 
 ## 🏃Run
+
 ```
 flutter clean
 flutter packages get
@@ -28,14 +32,13 @@ flutter run
 ## 📷Preview
 
 ### Week 1
+
 ![demo_week1](/preview/demo_preview.png)
 
 ### Week 2
 
-https://user-images.githubusercontent.com/25078596/191906678-2eb26605-fc5b-457a-a9c4-8835aa43397d.mp4
-
-
-![demo_week2](/preview/demo_week2.mp4)
+![demo_week2](https://user-images.githubusercontent.com/25078596/191906678-2eb26605-fc5b-457a-a9c4-8835aa43397d.mp4)
 
 ## 📢Releases
-- Checkout [releases](https://github.com/duongoku/random-flutter/releases)
+
+-   Checkout [releases](https://github.com/duongoku/random-flutter/releases)
