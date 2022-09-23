@@ -1,25 +1,169 @@
-import 'package:flame/components.dart';
-import 'package:flame/events.dart';
-import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(GameWidget(game: MyGame()));
+  runApp(const MyApp());
 }
 
-class MyGame extends FlameGame with TapDetector {
-  TextComponent text = TextComponent();
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
-  Future<void> onLoad() async {
-    super.onLoad();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Week 2 Demo',
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Week 2 Demo'),
+        ),
+        body: const Center(
+          child: DemoStatefulWidget(),
+        ),
+      ),
+    );
+  }
+}
 
-    text
-      ..text = "Hello World\nWe're group 2 (Dương and Dũng)\nThis app is built with Flame"
-      ..y = 50
-      ..x = 50
-      ..scale = Vector2(0.75, 0.75);
+class DemoStatefulWidget extends StatefulWidget {
+  const DemoStatefulWidget({super.key});
 
-    add(text);
+  @override
+  State<DemoStatefulWidget> createState() => _DemoStatefulWidgetState();
+}
+
+class _DemoStatefulWidgetState extends State<DemoStatefulWidget> {
+  bool checked = true;
+  double sliderValue = 0.0;
+
+  void changeChecked() {
+    setState(() {
+      checked = !checked;
+      sliderValue += 0.2;
+      sliderValue %= 1.0;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(padding: const EdgeInsets.all(32), children: [
+      const Divider(),
+      Container(
+          color: checked ? Colors.blueAccent : Colors.amberAccent,
+          child: FloatingActionButton(
+            onPressed: () {
+              changeChecked();
+            },
+            backgroundColor: checked ? Colors.amberAccent : Colors.blueAccent,
+          )),
+      const Divider(),
+      OutlinedButton(
+        onPressed: () {
+          changeChecked();
+        },
+        child: Text(
+          checked ? 'Click here!' : 'Click here again!',
+        ),
+      ),
+      const Divider(),
+      Checkbox(
+        value: checked,
+        onChanged: (value) {
+          changeChecked();
+        },
+      ),
+      const Divider(),
+      Slider(
+        value: sliderValue,
+        onChanged: (value) {
+          setState(() {
+            checked = !checked;
+            sliderValue = value;
+          });
+        },
+      ),
+      const Divider(),
+      Switch(
+        value: !checked,
+        onChanged: (value) {
+          changeChecked();
+        },
+      ),
+      const Divider(),
+      IconButton(
+        icon: checked
+            ? const Icon(Icons.airplanemode_off)
+            : const Icon(Icons.airplanemode_on),
+        iconSize: 40,
+        onPressed: () {
+          changeChecked();
+        },
+      ),
+      const Divider(),
+      TextField(
+        decoration: InputDecoration(
+          border: const OutlineInputBorder(),
+          labelText: checked ? 'Enter your name' : 'Enter your age',
+        ),
+      ),
+      const Divider(),
+      Container(
+          color: checked ? Colors.blueAccent : Colors.amberAccent,
+          child: FloatingActionButton(
+            onPressed: () {
+              changeChecked();
+            },
+            backgroundColor: checked ? Colors.amberAccent : Colors.blueAccent,
+          )),
+      const Divider(),
+      OutlinedButton(
+        onPressed: () {
+          changeChecked();
+        },
+        child: Text(
+          checked ? 'Click here!' : 'Click here again!',
+        ),
+      ),
+      const Divider(),
+      Checkbox(
+        value: checked,
+        onChanged: (value) {
+          changeChecked();
+        },
+      ),
+      const Divider(),
+      Slider(
+        value: sliderValue,
+        onChanged: (value) {
+          setState(() {
+            checked = !checked;
+            sliderValue = value;
+          });
+        },
+      ),
+      const Divider(),
+      Switch(
+        value: !checked,
+        onChanged: (value) {
+          changeChecked();
+        },
+      ),
+      const Divider(),
+      IconButton(
+        icon: checked
+            ? const Icon(Icons.airplanemode_off)
+            : const Icon(Icons.airplanemode_on),
+        iconSize: 40,
+        onPressed: () {
+          changeChecked();
+        },
+      ),
+      const Divider(),
+      TextField(
+        decoration: InputDecoration(
+          border: const OutlineInputBorder(),
+          labelText: checked ? 'Enter your name' : 'Enter your age',
+        ),
+      ),
+      const Divider(),
+    ]);
   }
 }
