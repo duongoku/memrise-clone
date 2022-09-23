@@ -37,7 +37,11 @@ flutter run
 
 ### Week 2
 
-https://user-images.githubusercontent.com/25078596/191906678-2eb26605-fc5b-457a-a9c4-8835aa43397d.mp4
+
+
+https://user-images.githubusercontent.com/25078596/191907589-518fe3bd-c76e-4173-99e1-0604065d7817.mp4
+
+
 
 ## 📢Releases
 
