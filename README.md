@@ -37,7 +37,7 @@ flutter run
 
 ### Week 2
 
-![demo_week2_youtube](https://youtu.be/07Zi8iVkKfQ)
+https://youtu.be/07Zi8iVkKfQ
 
 ## 📢Releases
 
