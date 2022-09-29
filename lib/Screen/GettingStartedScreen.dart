@@ -60,7 +60,7 @@ class GettingStarted extends StatelessWidget {
                         ),
                         onPressed: () {
                           Navigator.of(context).pushNamedAndRemoveUntil(
-                              '/Sample/', (route) => false);
+                              '/LanguageSelection/', (route) => false);
                         },
                         child: const Text(
                           'Get started',

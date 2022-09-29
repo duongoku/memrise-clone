@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:demo/Colors/CustomPalette.dart';
+
+import 'package:flutter/material.dart';
 
 class LanguageSelectionScreen extends StatefulWidget {
   const LanguageSelectionScreen({super.key});
@@ -107,7 +108,13 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
               children: languages.map((String language) {
                 return ListTile(
                   title: Center(
-                    child: Text(language, style: whiteText),
+                    child: TextButton(
+                      child: Text(language, style: whiteText),
+                      onPressed: () {
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            '/LessonSelection/', (route) => false);
+                      },
+                    ),
                   ),
                 );
               }).toList(),
