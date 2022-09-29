@@ -18,7 +18,7 @@ class GettingStarted extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 50),
                 alignment: Alignment.center,
                 child: Image.asset(
-                  'assets/main_logo2.jpg',
+                  'assets/images/main_logo2.jpg',
                   width: containerWidth,
                 ),
               ),
