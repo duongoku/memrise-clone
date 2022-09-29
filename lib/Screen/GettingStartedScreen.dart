@@ -53,14 +53,14 @@ class GettingStarted extends StatelessWidget {
                       height: buttonHeigth,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              CustomPalette.secondaryColor,
+                          backgroundColor: CustomPalette.secondaryColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0),
                           ),
                         ),
                         onPressed: () {
-                          Navigator.of(context).pushNamedAndRemoveUntil('/Sample/', (route) => false);
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                              '/Sample/', (route) => false);
                         },
                         child: const Text(
                           'Get started',
@@ -73,8 +73,7 @@ class GettingStarted extends StatelessWidget {
                       height: buttonHeigth,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              CustomPalette.lighterPrimaryColor,
+                          backgroundColor: CustomPalette.lighterPrimaryColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0),
                           ),
@@ -95,14 +94,4 @@ class GettingStarted extends StatelessWidget {
           ],
         ));
   }
-}
-
-Route _createRoute() {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) =>
-        const LanguageSelectionWidget(),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      return child;
-    },
-  );
 }
