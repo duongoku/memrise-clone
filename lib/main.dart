@@ -1,5 +1,5 @@
 import 'package:demo/Screen/GettingStartedScreen.dart';
-import 'package:demo/Screen/Sample.dart';
+import 'package:demo/Screen/LearnScreen.dart';
 import 'package:flutter/material.dart';
 
 
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       home: GettingStarted(), 
       routes: {
         '/GettingStarted/': (context) => const GettingStarted(),
-        '/Sample/': (context) => const Sample()
+        '/Sample/': (context) => const LearnScreen()
       },
     );
   }

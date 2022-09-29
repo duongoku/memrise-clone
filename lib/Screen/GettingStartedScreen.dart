@@ -1,3 +1,4 @@
+import 'package:demo/Colors/CustomPalette.dart';
 import 'package:flutter/material.dart';
 import 'package:demo/Screen/LanguageSelectionScreen.dart';
 
@@ -9,7 +10,7 @@ class GettingStarted extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color.fromARGB(255, 4, 0, 25),
+        backgroundColor: CustomPalette.primaryColor,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -53,7 +54,7 @@ class GettingStarted extends StatelessWidget {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
-                              const Color.fromARGB(255, 233, 253, 108),
+                              CustomPalette.secondaryColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0),
                           ),
@@ -73,7 +74,7 @@ class GettingStarted extends StatelessWidget {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
-                              const Color.fromARGB(255, 11, 41, 57),
+                              CustomPalette.lighterPrimaryColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0),
                           ),
