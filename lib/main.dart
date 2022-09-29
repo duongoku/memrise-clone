@@ -1,4 +1,5 @@
 import 'package:demo/Screen/GettingStartedScreen.dart';
+import 'package:demo/Screen/Sample.dart';
 import 'package:flutter/material.dart';
 
 
@@ -12,11 +13,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     
     const appTitle = 'Memrise';
+    // ignore: prefer_const_constructors
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: appTitle,
-     
       home: GettingStarted(), 
+      routes: {
+        '/GettingStarted/': (context) => const GettingStarted(),
+        '/Sample/': (context) => const Sample()
+      },
     );
   }
 }

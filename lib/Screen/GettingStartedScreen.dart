@@ -59,8 +59,7 @@ class GettingStarted extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          debugPrint('Received click');
-                          Navigator.of(context).push(_createRoute());
+                          Navigator.of(context).pushNamedAndRemoveUntil('/Sample/', (route) => false);
                         },
                         child: const Text(
                           'Get started',
