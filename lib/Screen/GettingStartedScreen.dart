@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:demo/Screen/LanguageSelectionScreen.dart';
 
 class GettingStarted extends StatelessWidget {
   const GettingStarted({super.key});
@@ -47,18 +48,19 @@ class GettingStarted extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SizedBox(
-
                       width: containerWidth,
                       height: buttonHeigth,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(255, 233,253,108),
+                          backgroundColor:
+                              const Color.fromARGB(255, 233, 253, 108),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0),
                           ),
                         ),
                         onPressed: () {
                           debugPrint('Received click');
+                          Navigator.of(context).push(_createRoute());
                         },
                         child: const Text(
                           'Get started',
@@ -71,7 +73,8 @@ class GettingStarted extends StatelessWidget {
                       height: buttonHeigth,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(255, 11,41,57),
+                          backgroundColor:
+                              const Color.fromARGB(255, 11, 41, 57),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0),
                           ),
@@ -92,4 +95,14 @@ class GettingStarted extends StatelessWidget {
           ],
         ));
   }
+}
+
+Route _createRoute() {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) =>
+        const LanguageSelectionWidget(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      return child;
+    },
+  );
 }
