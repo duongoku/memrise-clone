@@ -1,6 +1,7 @@
 # ⚡random-flutter
 
-A flutter app for class INT3120 40
+A flutter app for class INT3120 40.
+This app is a clone of [Memrise](https://play.google.com/store/apps/details?id=com.memrise.android.memrisecompanion).
 
 - [⚡random-flutter](#random-flutter)
   - [👪Members](#members)
