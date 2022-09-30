@@ -42,21 +42,25 @@ https://youtu.be/07Zi8iVkKfQ
 
 ### Week 5
 
-- Getting started screen:
-
-  ![Getting started screen](/preview/screen1.png)
-
-- Language selection screen:
-
-  ![Language selection screen](/preview/screen2.png)
-
-- Lesson selection screen:
-
-  ![Lesson selection screen](/preview/screen3.png)
-
-- Learn screen:
-
-  ![Learn screen](/preview/screen4.png)
+<table>
+<tr>
+<td>
+  Getting started screen:</br></br>
+  <img src="/preview/screen1.png" alt="Getting started screen" width="200"/>
+</td>
+<td>
+  Language selection screen:</br></br>
+  <img src="/preview/screen2.png" alt="Language selection screen" width="200"/>
+</td>
+<td>
+  Lesson selection screen:</br></br>
+  <img src="/preview/screen3.png" alt="Lesson selection screen" width="200"/>
+</td>
+<td>
+  Learn screen:</br></br>
+  <img src="/preview/screen4.png" alt="Learn screen" width="200"/>
+</td>
+</tr></table>
 
 - Video demo:
 
