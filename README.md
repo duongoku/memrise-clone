@@ -58,6 +58,10 @@ https://youtu.be/07Zi8iVkKfQ
 
   ![Learn screen](/preview/screen4.png)
 
+- Video demo:
+
+  ![Video demo](/preview/week5.gif)
+
 ## 📢Releases
 
 -   Checkout [releases](https://github.com/duongoku/random-flutter/releases)
