@@ -21,7 +21,7 @@ class _LearnScreenState extends State<LearnScreen> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: CustomPalette.iconColor),
           onPressed: () => Navigator.of(context)
-              .pushNamedAndRemoveUntil('/GettingStarted/', (route) => false),
+              .pushNamedAndRemoveUntil('/LessonSelection/', (route) => false),
         ),
         backgroundColor: CustomPalette.lighterPrimaryColor,
         actions: [

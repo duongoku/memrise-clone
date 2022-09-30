@@ -26,7 +26,7 @@ class _LessonSelectionScreenState extends State<LessonSelectionScreen> {
       ]));
 
   toLearnScreen() {
-    Navigator.of(context).pushNamedAndRemoveUntil('/Sample/', (route) => false);
+    Navigator.of(context).pushNamedAndRemoveUntil('/LearnScreen/', (route) => false);
   }
 
   @override

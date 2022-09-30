@@ -16,12 +16,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: appTitle,
-      home: const LessonSelectionScreen(),
+      home: const GettingStarted(),
       routes: {
         '/GettingStarted/': (context) => const GettingStarted(),
         '/LanguageSelection/': (context) => const LanguageSelectionScreen(),
         '/LessonSelection/': (context) => const LessonSelectionScreen(),
-        '/Sample/': (context) => const LearnScreen()
+        '/LearnScreen/': (context) => const LearnScreen()
       },
     );
   }
