@@ -9,6 +9,7 @@ A flutter app for class INT3120 40
   - [📷Preview](#preview)
     - [Week 1](#week-1)
     - [Week 2](#week-2)
+    - [Week 3](#week-3)
   - [📢Releases](#releases)
 
 ## 👪Members
@@ -38,6 +39,24 @@ flutter run
 ### Week 2
 
 https://youtu.be/07Zi8iVkKfQ
+
+### Week 3
+
+- Getting started screen:
+
+  ![Getting started screen](/preview/screen1.png)
+
+- Language selection screen:
+
+  ![Language selection screen](/preview/screen2.png)
+
+- Lesson selection screen:
+
+  ![Lesson selection screen](/preview/screen3.png)
+
+- Learn screen:
+
+  ![Learn screen](/preview/screen4.png)
 
 ## 📢Releases
 
