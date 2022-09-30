@@ -19,16 +19,16 @@ class _LearnScreenState extends State<LearnScreen> {
       backgroundColor: CustomPalette.primaryColor,
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: CustomPalette.iconColor),
+          icon: const Icon(Icons.arrow_back, color: CustomPalette.iconColor),
           onPressed: () => Navigator.of(context)
               .pushNamedAndRemoveUntil('/LessonSelection/', (route) => false),
         ),
         backgroundColor: CustomPalette.lighterPrimaryColor,
         actions: [
           Container(
-            margin: EdgeInsets.only(right: 20),
+            margin: const EdgeInsets.only(right: 20),
             alignment: Alignment.center,
-            child: Text(
+            child: const Text(
               '0',
               style: TextStyle(fontSize: 20, color: CustomPalette.iconColor),
             ),
@@ -47,7 +47,7 @@ class _LearnScreenState extends State<LearnScreen> {
         Container(
           padding: const EdgeInsets.only(top: 15),
           alignment: Alignment.center,
-          child: Text(
+          child: const Text(
             'く',
             style: TextStyle(color: Colors.white, fontSize: 24),
           ),
@@ -55,7 +55,7 @@ class _LearnScreenState extends State<LearnScreen> {
         Container(
           padding: const EdgeInsets.only(top: 35),
           alignment: Alignment.center,
-          child: Text(
+          child: const Text(
             'ENGLISH(US)',
             style: TextStyle(color: Colors.grey, fontSize: 12),
           ),
@@ -63,7 +63,7 @@ class _LearnScreenState extends State<LearnScreen> {
         Container(
             padding: const EdgeInsets.only(top: 15),
             alignment: Alignment.center,
-            child: Text(
+            child: const Text(
               '\'ku\'',
               style: TextStyle(color: Colors.white, fontSize: 24),
             )),
