@@ -1,6 +1,5 @@
-import 'package:demo/Colors/CustomPalette.dart';
+import 'package:demo/colors/custom_palette.dart';
 import 'package:flutter/material.dart';
-import 'package:demo/Screen/LanguageSelectionScreen.dart';
 
 class GettingStarted extends StatelessWidget {
   const GettingStarted({super.key});

@@ -1,4 +1,4 @@
-import 'package:demo/Colors/CustomPalette.dart';
+import 'package:demo/colors/custom_palette.dart';
 
 import 'package:flutter/material.dart';
 

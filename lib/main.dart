@@ -1,7 +1,7 @@
-import 'package:demo/Screen/GettingStartedScreen.dart';
-import 'package:demo/Screen/LanguageSelectionScreen.dart';
-import 'package:demo/Screen/LearnScreen.dart';
-import 'package:demo/Screen/LessonSelectionScreen.dart';
+import 'package:demo/screens/getting_started_screen.dart';
+import 'package:demo/screens/language_selection_screen.dart';
+import 'package:demo/screens/learn_screen.dart';
+import 'package:demo/screens/lesson_selection_screen.dart';
 
 import 'package:flutter/material.dart';
 
