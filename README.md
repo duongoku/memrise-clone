@@ -62,6 +62,8 @@ https://youtu.be/07Zi8iVkKfQ
 
   ![Video demo](/preview/week5.gif)
 
+- APK available [here](https://github.com/duongoku/random-flutter/releases/tag/v0.0.1-alpha)
+
 ## 📢Releases
 
 -   Checkout [releases](https://github.com/duongoku/random-flutter/releases)
