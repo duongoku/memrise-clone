@@ -7,9 +7,9 @@ A flutter app for class INT3120 40
   - [💿Prerequisites](#prerequisites)
   - [🏃Run](#run)
   - [📷Preview](#preview)
-    - [Week 1](#week-1)
-    - [Week 2](#week-2)
     - [Week 3](#week-3)
+    - [Week 4](#week-4)
+    - [Week 5](#week-5)
   - [📢Releases](#releases)
 
 ## 👪Members
@@ -32,15 +32,15 @@ flutter run
 
 ## 📷Preview
 
-### Week 1
+### Week 3
 
 ![demo_week1](/preview/demo_preview.png)
 
-### Week 2
+### Week 4
 
 https://youtu.be/07Zi8iVkKfQ
 
-### Week 3
+### Week 5
 
 - Getting started screen:
 
