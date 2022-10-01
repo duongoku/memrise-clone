@@ -44,30 +44,31 @@ https://youtu.be/07Zi8iVkKfQ
 ### Week 5
 
 <table>
-<tr>
-<td>
-  Getting started screen:</br></br>
-  <img src="/preview/screen1.png" alt="Getting started screen" width="200"/>
-</td>
-<td>
-  Language selection screen:</br></br>
-  <img src="/preview/screen2.png" alt="Language selection screen" width="200"/>
-</td>
-<td>
-  Lesson selection screen:</br></br>
-  <img src="/preview/screen3.png" alt="Lesson selection screen" width="200"/>
-</td>
-<td>
-  Learn screen:</br></br>
-  <img src="/preview/screen4.png" alt="Learn screen" width="200"/>
-</td>
-</tr></table>
+  <tr>
+    <td>
+      Getting started screen:</br></br>
+      <img src="/preview/screen1.png" alt="Getting started screen" width="200"/>
+    </td>
+    <td>
+      Language selection screen:</br></br>
+      <img src="/preview/screen2.png" alt="Language selection screen" width="200"/>
+    </td>
+    <td>
+      Lesson selection screen:</br></br>
+      <img src="/preview/screen3.png" alt="Lesson selection screen" width="200"/>
+    </td>
+    <td>
+      Learn screen:</br></br>
+      <img src="/preview/screen4.png" alt="Learn screen" width="200"/>
+    </td>
+  </tr>
+</table>
 
--   Video demo:
+Video demo:
 
-    ![Video demo](/preview/week5.gif)
+![Video demo](/preview/week5.gif)
 
--   APK available [here](https://github.com/duongoku/random-flutter/releases/tag/v0.0.1-alpha)
+APK available [here](https://github.com/duongoku/random-flutter/releases/tag/v0.0.1-alpha)
 
 ## 📢Releases
 
