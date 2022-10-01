@@ -1,9 +1,9 @@
-# ⚡random-flutter
+# ⚡memrise-clone
 
 A flutter app for class INT3120 40.
 This app is a clone of [Memrise](https://play.google.com/store/apps/details?id=com.memrise.android.memrisecompanion).
 
-- [⚡random-flutter](#random-flutter)
+- [⚡memrise-clone](#memrise-clone)
   - [👪Members](#members)
   - [💿Prerequisites](#prerequisites)
   - [🏃Run](#run)
@@ -63,11 +63,11 @@ https://youtu.be/07Zi8iVkKfQ
 </td>
 </tr></table>
 
-- Video demo:
+-   Video demo:
 
-  ![Video demo](/preview/week5.gif)
+    ![Video demo](/preview/week5.gif)
 
-- APK available [here](https://github.com/duongoku/random-flutter/releases/tag/v0.0.1-alpha)
+-   APK available [here](https://github.com/duongoku/random-flutter/releases/tag/v0.0.1-alpha)
 
 ## 📢Releases
 
