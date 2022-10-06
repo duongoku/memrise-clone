@@ -1,6 +1,15 @@
 import 'package:demo/colors/custom_palette.dart';
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+Future<List> loadLanguages() async {
+  final String jsonString =
+      await rootBundle.loadString("assets/data/languages.json");
+  return json.decode(jsonString);
+}
 
 class LanguageSelectionScreen extends StatefulWidget {
   const LanguageSelectionScreen({super.key});
@@ -11,35 +20,24 @@ class LanguageSelectionScreen extends StatefulWidget {
 }
 
 class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
-  static const languages = [
-    "English",
-    "Spanish",
-    "French",
-    "German",
-    "Italian",
-    "Portuguese",
-    "Russian",
-    "Turkish",
-    "Chinese",
-    "Japanese",
-    "Korean",
-    "Arabic",
-    "Hindi",
-    "Indonesian",
-    "Thai",
-    "Vietnamese",
-    "Dutch",
-    "Polish",
-    "Swedish",
-    "Danish",
-    "Norwegian",
-  ];
+  static var languages = <String>[];
 
-  String selectedLanguage = languages[0];
+  String selectedLanguage = "";
 
   TextStyle whiteText = const TextStyle(color: Colors.white, fontSize: 20);
   TextStyle blackText =
       const TextStyle(color: Color.fromRGBO(0, 0, 0, 1), fontSize: 20);
+
+  @override
+  void initState() {
+    super.initState();
+    loadLanguages().then((value) {
+      setState(() {
+        languages =  List<String>.from(value);
+        selectedLanguage = languages[0];
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
