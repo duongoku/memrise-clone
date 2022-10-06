@@ -2,6 +2,7 @@ import 'package:demo/screens/getting_started_screen.dart';
 import 'package:demo/screens/language_selection_screen.dart';
 import 'package:demo/screens/learn_screen.dart';
 import 'package:demo/screens/lesson_selection_screen.dart';
+import 'package:demo/screens/register_screen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: appTitle,
-      home: const GettingStarted(),
+      home: const RegisterScreen(),
       routes: {
         '/GettingStarted/': (context) => const GettingStarted(),
         '/LanguageSelection/': (context) => const LanguageSelectionScreen(),

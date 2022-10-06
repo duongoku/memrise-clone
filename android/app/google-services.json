@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "13849478066",
+    "project_id": "int3120-memrize",
+    "storage_bucket": "int3120-memrize.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13849478066:android:e0b25b6c9182484a159aab",
+        "android_client_info": {
+          "package_name": "com.example.demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "13849478066-01klc8kb1qikh7o0qk0om963ol483eoe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBz_OXgjoXl4v1vRVE2w1FEY_txKlhhL7s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "13849478066-01klc8kb1qikh7o0qk0om963ol483eoe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

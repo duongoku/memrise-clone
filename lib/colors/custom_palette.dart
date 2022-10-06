@@ -8,4 +8,5 @@ class CustomPalette {
   static const Color secondaryColor = Color.fromARGB(255, 233, 253, 108);
   static const Color iconColor = Color.fromARGB(255, 76,180,161);
   static const Color brown = Color.fromARGB(255, 122,45,21);
+  static const Color textField = Color.fromARGB(255, 57, 70, 87);
 }
