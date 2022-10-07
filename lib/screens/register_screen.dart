@@ -16,7 +16,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController? _email;
   TextEditingController? _password;
   static const double containerWidth = 250;
-  static const double logoWidth = 200;
+  static const double logoWidth = 150;
   static const double buttonHeigth = 45;
   static const double textFieldHeigth = 50;
 
@@ -127,41 +127,57 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                 ),
+                Container(
+                  padding: EdgeInsets.only(top: 30),
+                  alignment: Alignment.center,
+                  child: TextButton(
+                    onPressed: (() {
+                      print('redirect to login');
+                    }),
+                    child: const Text(
+                      'Already have an account? Login now!',
+                      style: TextStyle(color: Colors.white, decoration: TextDecoration.underline),
+                    ),
+                  ),
+                )
               ],
             ),
           ),
-          Container(
-            margin: const EdgeInsets.fromLTRB(0, 100, 0, 30),
-            width: containerWidth,
-            child: SizedBox(
-              width: containerWidth,
-              height: buttonHeigth,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: CustomPalette.brown,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
+          FutureBuilder(
+            future: Firebase.initializeApp(
+              options: DefaultFirebaseOptions.currentPlatform,
+            ),
+            builder: (context, snapshot) {
+              return Container(
+                
+                width: containerWidth,
+                child: SizedBox(
+                  width: containerWidth,
+                  height: buttonHeigth,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: CustomPalette.brown,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                    ),
+                    onPressed: () async {
+                      final email = _email!.text;
+                      final password = _password!.text;
+
+                      final userCredential = await FirebaseAuth.instance
+                          .createUserWithEmailAndPassword(
+                              email: email, password: password);
+                      print('userCredential');
+                    },
+                    child: const Text(
+                      'Register',
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
                   ),
                 ),
-                onPressed: () async {
-                  await Firebase.initializeApp(
-                    options: DefaultFirebaseOptions.currentPlatform,
-                  );
-
-                  final email = _email!.text;
-                  final password = _password!.text;
-                  
-                  final userCredential = await FirebaseAuth.instance
-                      .createUserWithEmailAndPassword(
-                          email: email, password: password);
-                  
-                },
-                child: const Text(
-                  'Register',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-              ),
-            ),
+              );
+            },
           ),
         ],
       ),
