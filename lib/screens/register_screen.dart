@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'package:flutter/foundation.dart';
+
 import '../firebase_options.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -61,7 +63,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    padding: EdgeInsets.only(bottom: 10),
+                    padding: const EdgeInsets.only(bottom: 10),
                     child: const Text(
                       'Email',
                       style: TextStyle(color: Colors.white, fontSize: 18),
@@ -87,7 +89,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             style: BorderStyle.none,
                           ),
                         ),
-                        contentPadding: EdgeInsets.fromLTRB(20, 10, 0, 10),
+                        contentPadding: const EdgeInsets.fromLTRB(20, 10, 0, 10),
                         hintText: 'example@gmail.com',
                         hintStyle: TextStyle(
                             fontSize: 15.0, color: Colors.blueGrey[100]),
@@ -95,7 +97,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(0, 30, 0, 10),
+                    padding: const EdgeInsets.fromLTRB(0, 30, 0, 10),
                     child: const Text(
                       'Password',
                       style: TextStyle(color: Colors.white, fontSize: 18),
@@ -124,7 +126,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             style: BorderStyle.none,
                           ),
                         ),
-                        contentPadding: EdgeInsets.fromLTRB(20, 10, 0, 10),
+                        contentPadding: const EdgeInsets.fromLTRB(20, 10, 0, 10),
                         hintText: 'Password',
                         hintStyle: TextStyle(
                             fontSize: 15.0, color: Colors.blueGrey[100]),
@@ -133,11 +135,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   widget.isRegistering
                       ? Container(
-                          padding: EdgeInsets.only(top: 30),
+                          padding: const EdgeInsets.only(top: 30),
                           alignment: Alignment.center,
                           child: TextButton(
                             onPressed: (() {
-                              print('redirect to login');
+                              if (kDebugMode) {
+                                print('redirect to login');
+                              }
                             }),
                             child: const Text(
                               'Already have an account? Login now!',
@@ -148,7 +152,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                         )
                       : Container(
-                          padding: EdgeInsets.only(top: 30),
+                          padding: const EdgeInsets.only(top: 30),
                         ),
                 ],
               ),
@@ -158,7 +162,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 options: DefaultFirebaseOptions.currentPlatform,
               ),
               builder: (context, snapshot) {
-                return Container(
+                return SizedBox(
                   width: containerWidth,
                   child: SizedBox(
                     width: containerWidth,
@@ -189,7 +193,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       },
                       child: Text(
                         widget.isRegistering ? 'Register' : 'Login',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
+                        style: const TextStyle(color: Colors.white, fontSize: 20),
                       ),
                     ),
                   ),
