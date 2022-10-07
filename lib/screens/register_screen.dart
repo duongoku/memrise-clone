@@ -38,149 +38,154 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: CustomPalette.primaryColor,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Container(
-            padding: const EdgeInsets.only(top: 40),
-            alignment: Alignment.center,
-            child: Image.asset(
-              'assets/images/main_logo2.jpg',
-              width: logoWidth,
+      body: ListView(children: [
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.only(top: 40),
+              alignment: Alignment.center,
+              child: Image.asset(
+                'assets/images/main_logo2.jpg',
+                width: logoWidth,
+              ),
             ),
-          ),
-          Container(
-            padding: const EdgeInsets.only(top: 40),
-            width: containerWidth,
-            alignment: Alignment.topLeft,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding: EdgeInsets.only(bottom: 10),
-                  child: const Text(
-                    'Email',
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                    textAlign: TextAlign.left,
-                  ),
-                ),
-                SizedBox(
-                  height: textFieldHeigth,
-                  child: TextField(
-                    controller: _email,
-                    style: const TextStyle(
-                        fontSize: 15.0,
-                        color: Colors.white,
-                        decoration: TextDecoration.none),
-                    textAlignVertical: TextAlignVertical.center,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: CustomPalette.textField,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: const BorderSide(
-                          width: 0,
-                          style: BorderStyle.none,
-                        ),
-                      ),
-                      contentPadding: EdgeInsets.fromLTRB(20, 10, 0, 10),
-                      hintText: 'example@gmail.com',
-                      hintStyle: TextStyle(
-                          fontSize: 15.0, color: Colors.blueGrey[100]),
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(0, 30, 0, 10),
-                  child: const Text(
-                    'Password',
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                    textAlign: TextAlign.left,
-                  ),
-                ),
-                SizedBox(
-                  height: textFieldHeigth,
-                  child: TextField(
-                    controller: _password,
-                    obscureText: true,
-                    enableSuggestions: false,
-                    autocorrect: false,
-                    style: const TextStyle(
-                        fontSize: 15.0,
-                        color: Colors.white,
-                        decoration: TextDecoration.none),
-                    textAlignVertical: TextAlignVertical.center,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: CustomPalette.textField,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: const BorderSide(
-                          width: 0,
-                          style: BorderStyle.none,
-                        ),
-                      ),
-                      contentPadding: EdgeInsets.fromLTRB(20, 10, 0, 10),
-                      hintText: 'Password',
-                      hintStyle: TextStyle(
-                          fontSize: 15.0, color: Colors.blueGrey[100]),
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.only(top: 30),
-                  alignment: Alignment.center,
-                  child: TextButton(
-                    onPressed: (() {
-                      print('redirect to login');
-                    }),
+            Container(
+              padding: const EdgeInsets.only(top: 40),
+              width: containerWidth,
+              alignment: Alignment.topLeft,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(bottom: 10),
                     child: const Text(
-                      'Already have an account? Login now!',
-                      style: TextStyle(color: Colors.white, decoration: TextDecoration.underline),
+                      'Email',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      textAlign: TextAlign.left,
                     ),
                   ),
-                )
-              ],
+                  SizedBox(
+                    height: textFieldHeigth,
+                    child: TextField(
+                      controller: _email,
+                      style: const TextStyle(
+                          fontSize: 15.0,
+                          color: Colors.white,
+                          decoration: TextDecoration.none),
+                      textAlignVertical: TextAlignVertical.center,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: CustomPalette.textField,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: const BorderSide(
+                            width: 0,
+                            style: BorderStyle.none,
+                          ),
+                        ),
+                        contentPadding: EdgeInsets.fromLTRB(20, 10, 0, 10),
+                        hintText: 'example@gmail.com',
+                        hintStyle: TextStyle(
+                            fontSize: 15.0, color: Colors.blueGrey[100]),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(0, 30, 0, 10),
+                    child: const Text(
+                      'Password',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      textAlign: TextAlign.left,
+                    ),
+                  ),
+                  SizedBox(
+                    height: textFieldHeigth,
+                    child: TextField(
+                      controller: _password,
+                      obscureText: true,
+                      enableSuggestions: false,
+                      autocorrect: false,
+                      style: const TextStyle(
+                          fontSize: 15.0,
+                          color: Colors.white,
+                          decoration: TextDecoration.none),
+                      textAlignVertical: TextAlignVertical.center,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: CustomPalette.textField,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: const BorderSide(
+                            width: 0,
+                            style: BorderStyle.none,
+                          ),
+                        ),
+                        contentPadding: EdgeInsets.fromLTRB(20, 10, 0, 10),
+                        hintText: 'Password',
+                        hintStyle: TextStyle(
+                            fontSize: 15.0, color: Colors.blueGrey[100]),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 30),
+                    alignment: Alignment.center,
+                    child: TextButton(
+                      onPressed: (() {
+                        print('redirect to login');
+                      }),
+                      child: const Text(
+                        'Already have an account? Login now!',
+                        style: TextStyle(
+                            color: Colors.white,
+                            decoration: TextDecoration.underline),
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-          FutureBuilder(
-            future: Firebase.initializeApp(
-              options: DefaultFirebaseOptions.currentPlatform,
-            ),
-            builder: (context, snapshot) {
-              return Container(
-                
-                width: containerWidth,
-                child: SizedBox(
+            FutureBuilder(
+              future: Firebase.initializeApp(
+                options: DefaultFirebaseOptions.currentPlatform,
+              ),
+              builder: (context, snapshot) {
+                return Container(
                   width: containerWidth,
-                  height: buttonHeigth,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: CustomPalette.brown,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
+                  child: SizedBox(
+                    width: containerWidth,
+                    height: buttonHeigth,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: CustomPalette.brown,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                      ),
+                      onPressed: () async {
+                        final email = _email!.text;
+                        final password = _password!.text;
+
+                        await FirebaseAuth.instance
+                            .createUserWithEmailAndPassword(
+                                email: email, password: password);
+                        // redirect to login code here
+                        // Navigator.of(context).pushNamedAndRemoveUntil(
+                        //     '/LoginScreen/', (route) => false);
+                      },
+                      child: const Text(
+                        'Register',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                     ),
-                    onPressed: () async {
-                      final email = _email!.text;
-                      final password = _password!.text;
-
-                      final userCredential = await FirebaseAuth.instance
-                          .createUserWithEmailAndPassword(
-                              email: email, password: password);
-                      print('userCredential');
-                    },
-                    child: const Text(
-                      'Register',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
                   ),
-                ),
-              );
-            },
-          ),
-        ],
-      ),
+                );
+              },
+            ),
+          ],
+        ),
+      ]),
     );
   }
 }

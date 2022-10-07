@@ -35,60 +35,60 @@ class _LearnScreenState extends State<LearnScreen> {
           ),
         ],
       ),
-      body: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-        Container(
-          padding: const EdgeInsets.only(top: 10),
-          alignment: Alignment.center,
-          child: Image.asset(
-            'assets/images/ku.gif',
-            width: containerWidth,
+      body: ListView(children: [
+        Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+          Container(
+            padding: const EdgeInsets.only(top: 10),
+            alignment: Alignment.center,
+            child: Image.asset(
+              'assets/images/ku.gif',
+              width: containerWidth,
+            ),
           ),
-        ),
-        Container(
-          padding: const EdgeInsets.only(top: 15),
-          alignment: Alignment.center,
-          child: const Text(
-            'く',
-            style: TextStyle(color: Colors.white, fontSize: 24),
-          ),
-        ),
-        Container(
-          padding: const EdgeInsets.only(top: 35),
-          alignment: Alignment.center,
-          child: const Text(
-            'ENGLISH(US)',
-            style: TextStyle(color: Colors.grey, fontSize: 12),
-          ),
-        ),
-        Container(
+          Container(
             padding: const EdgeInsets.only(top: 15),
             alignment: Alignment.center,
             child: const Text(
-              '\'ku\'',
+              'く',
               style: TextStyle(color: Colors.white, fontSize: 24),
-            )),
-        Container(
-          padding: const EdgeInsets.only(top: 225),
-          child: SizedBox(
-            width: buttonWidth,
-            height: buttonHeigth,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: CustomPalette.brown,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-              ),
-              onPressed: () {
-                
-              },
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.only(top: 35),
+            alignment: Alignment.center,
+            child: const Text(
+              'ENGLISH(US)',
+              style: TextStyle(color: Colors.grey, fontSize: 12),
+            ),
+          ),
+          Container(
+              padding: const EdgeInsets.only(top: 15),
+              alignment: Alignment.center,
               child: const Text(
-                'Ok, got it',
-                style: TextStyle(color: Colors.white, fontSize: 20),
+                '\'ku\'',
+                style: TextStyle(color: Colors.white, fontSize: 24),
+              )),
+          Container(
+            padding: const EdgeInsets.only(top: 200),
+            child: SizedBox(
+              width: buttonWidth,
+              height: buttonHeigth,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: CustomPalette.brown,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                ),
+                onPressed: () {},
+                child: const Text(
+                  'Ok, got it',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
               ),
             ),
           ),
-        ),
+        ]),
       ]),
     );
   }
