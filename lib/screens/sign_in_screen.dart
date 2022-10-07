@@ -3,17 +3,17 @@ import "package:demo/colors/custom_palette.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_signin_button/flutter_signin_button.dart";
-import "package:google_sign_in/google_sign_in.dart";
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+class SignInSelectionScreen extends StatefulWidget {
+  const SignInSelectionScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<SignInSelectionScreen> createState() => _SignInSelectionScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _SignInSelectionScreenState extends State<SignInSelectionScreen> {
   static const double logoHeight = 125;
   static const double logoMarginBottom = 200;
   static const double logoMarginTop = 50;
@@ -21,30 +21,16 @@ class _SignInScreenState extends State<SignInScreen> {
   static const double signInButtonWidth = 300;
   static const double spaceBetweenButtons = 20;
 
-  void signInWithFacebook() {}
-  Future<void> signInWithGoogle() async {
-    GoogleSignIn googleSignIn = GoogleSignIn(
-      clientId: "YOUR_CLIENT_ID",
-      scopes: [
-        "email",
-        "https://www.googleapis.com/auth/userinfo.profile",
-      ],
-    );
-    try {
-      await googleSignIn.signIn();
-    } catch (error) {
-      if (kDebugMode) {
-        print(error);
-      }
-    }
-  }
+  Future<void> signInWithFacebook() async {}
+  Future<void> signInWithGoogle() async {}
 
-  Future<void> signInWithEmail(emailAddress, password) async {
+  Future<void> signInWithEmail(String emailAddress, String password) async {
     try {
-      final credential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: emailAddress, password: password);
+      await Firebase.initializeApp();
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailAddress.trim(), password: password);
       if (kDebugMode) {
-        print(credential);
+        print("${credential.user!.email} signed in!");
       }
     } on FirebaseAuthException catch (e) {
       if (kDebugMode) {
@@ -55,6 +41,11 @@ class _SignInScreenState extends State<SignInScreen> {
         }
       }
     }
+  }
+
+  void navigateToSignInScreen() {
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil('/SignInScreen/', (route) => false);
   }
 
   @override
@@ -111,9 +102,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15)),
                 Buttons.Email,
-                onPressed: () => {
-                  signInWithEmail("123@gmail.com ", "1234567"),
-                },
+                onPressed: navigateToSignInScreen,
               ),
             )),
       ]),

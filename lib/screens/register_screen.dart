@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import '../firebase_options.dart';
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+  final bool isRegistering;
+
+  const RegisterScreen({super.key, required this.isRegistering});
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -15,6 +17,7 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController? _email;
   TextEditingController? _password;
+
   static const double containerWidth = 250;
   static const double logoWidth = 150;
   static const double buttonHeigth = 45;
@@ -128,21 +131,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.only(top: 30),
-                    alignment: Alignment.center,
-                    child: TextButton(
-                      onPressed: (() {
-                        print('redirect to login');
-                      }),
-                      child: const Text(
-                        'Already have an account? Login now!',
-                        style: TextStyle(
-                            color: Colors.white,
-                            decoration: TextDecoration.underline),
-                      ),
-                    ),
-                  )
+                  widget.isRegistering
+                      ? Container(
+                          padding: EdgeInsets.only(top: 30),
+                          alignment: Alignment.center,
+                          child: TextButton(
+                            onPressed: (() {
+                              print('redirect to login');
+                            }),
+                            child: const Text(
+                              'Already have an account? Login now!',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  decoration: TextDecoration.underline),
+                            ),
+                          ),
+                        )
+                      : Container(
+                          padding: EdgeInsets.only(top: 30),
+                        ),
                 ],
               ),
             ),
@@ -167,15 +174,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         final email = _email!.text;
                         final password = _password!.text;
 
-                        await FirebaseAuth.instance
-                            .createUserWithEmailAndPassword(
-                                email: email, password: password);
+                        if (widget.isRegistering) {
+                          await FirebaseAuth.instance
+                              .createUserWithEmailAndPassword(
+                                  email: email, password: password);
+                        } else {
+                          await FirebaseAuth.instance
+                              .signInWithEmailAndPassword(
+                                  email: email, password: password);
+                        }
                         // redirect to login code here
                         // Navigator.of(context).pushNamedAndRemoveUntil(
                         //     '/LoginScreen/', (route) => false);
                       },
-                      child: const Text(
-                        'Register',
+                      child: Text(
+                        widget.isRegistering ? 'Register' : 'Login',
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                     ),

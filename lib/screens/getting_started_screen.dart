@@ -78,7 +78,8 @@ class GettingStarted extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          debugPrint('Received click');
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                              '/SignInScreen/', (route) => false);
                         },
                         child: const Text(
                           'I have an account',
