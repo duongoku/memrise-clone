@@ -40,6 +40,7 @@ dependencies:
   flutter_signin_button: ^2.0.0
   google_sign_in: ^5.4.2
   video_player: ^2.4.7
+  cloud_firestore: ^3.5.1
 
 dev_dependencies:
   flutter_test:
