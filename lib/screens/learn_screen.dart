@@ -1,5 +1,8 @@
 import 'package:demo/colors/custom_palette.dart';
+import 'package:demo/screens/prefab.dart';
 import 'package:flutter/material.dart';
+
+import 'new_phrase.dart';
 
 class LearnScreen extends StatefulWidget {
   const LearnScreen({super.key});
@@ -29,7 +32,7 @@ class _LearnScreenState extends State<LearnScreen> {
             margin: const EdgeInsets.only(right: 20),
             alignment: Alignment.center,
             child: const Text(
-              '0',
+              '0', // TODO: dynamic score
               style: TextStyle(fontSize: 20, color: CustomPalette.iconColor),
             ),
           ),
@@ -37,54 +40,23 @@ class _LearnScreenState extends State<LearnScreen> {
       ),
       body: ListView(children: [
         Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-          Container(
-            padding: const EdgeInsets.only(top: 10),
-            alignment: Alignment.center,
-            child: Image.asset(
-              'assets/images/ku.gif',
-              width: containerWidth,
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.only(top: 15),
-            alignment: Alignment.center,
-            child: const Text(
-              'く',
-              style: TextStyle(color: Colors.white, fontSize: 24),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.only(top: 35),
-            alignment: Alignment.center,
-            child: const Text(
-              'ENGLISH(US)',
-              style: TextStyle(color: Colors.grey, fontSize: 12),
-            ),
-          ),
-          Container(
-              padding: const EdgeInsets.only(top: 15),
-              alignment: Alignment.center,
-              child: const Text(
-                '\'ku\'',
-                style: TextStyle(color: Colors.white, fontSize: 24),
-              )),
-          Container(
-            padding: const EdgeInsets.only(top: 200),
+          Prefab.vPadding10,
+          Image.asset('assets/images/ku.gif', width: containerWidth),
+          Prefab.vPadding15,
+          const Text('く', style: Prefab.phraseStyle),
+          Prefab.vPadding35,
+          const Text('ENGLISH(US)', style: Prefab.srcStyle),
+          Prefab.vPadding15,
+          const Text('\'ku\'', style: Prefab.phraseStyle),
+          Prefab.vPadding150,
+          Center(
             child: SizedBox(
-              width: buttonWidth,
-              height: buttonHeigth,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: CustomPalette.brown,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                ),
-                onPressed: () {},
-                child: const Text(
-                  'Ok, got it',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
+              height: 50,
+              width: 350,
+              child: CustomElevatedButton(
+                onPressed: () {}, // TODO: implement
+                text: Prefab.okButtonText,
+                style: Prefab.okButtonStyle,
               ),
             ),
           ),
