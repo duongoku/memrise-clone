@@ -2,8 +2,6 @@ import 'package:demo/colors/custom_palette.dart';
 import 'package:demo/screens/prefab.dart';
 import 'package:flutter/material.dart';
 
-import 'new_phrase.dart';
-
 class LearnScreen extends StatefulWidget {
   const LearnScreen({super.key});
 
@@ -13,8 +11,6 @@ class LearnScreen extends StatefulWidget {
 
 class _LearnScreenState extends State<LearnScreen> {
   static const double containerWidth = 250;
-  static const double buttonWidth = 325;
-  static const double buttonHeigth = 45;
 
   @override
   Widget build(BuildContext context) {
