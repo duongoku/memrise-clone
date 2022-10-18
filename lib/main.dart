@@ -10,9 +10,13 @@ import 'package:flutter/material.dart';
 
 import '../firebase_options.dart';
 
-void main() {
+void startApp() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
+}
+
+void main() {
+  startApp();
 }
 
 class MyApp extends StatelessWidget {
@@ -35,9 +39,11 @@ class MyApp extends StatelessWidget {
         '/LanguageSelection/': (context) => const LanguageSelectionScreen(),
         '/LessonSelection/': (context) => const LessonSelectionScreen(),
         '/LearnScreen/': (context) => const LearnScreen(),
-        '/RegisterScreen/': (context) => const RegisterScreen(isRegistering: true),
-        '/SignInScreen/': (context) => const RegisterScreen(isRegistering: false),
-        '/SignInSelectionScreen/': (context) => const SignInSelectionScreen()
+        '/RegisterScreen/': (context) =>
+            const RegisterScreen(isRegistering: true),
+        '/SignInScreen/': (context) =>
+            const RegisterScreen(isRegistering: false),
+        '/SignInSelectionScreen/': (context) => const SignInSelectionScreen(),
       },
     );
   }

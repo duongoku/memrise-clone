@@ -1,5 +1,8 @@
 import 'package:demo/colors/custom_palette.dart';
+import 'package:demo/screens/new_phrase.dart';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class LessonSelectionScreen extends StatefulWidget {
@@ -28,8 +31,30 @@ class _LessonSelectionScreenState extends State<LessonSelectionScreen> {
   ]);
 
   toLearnScreen() {
-    Navigator.of(context)
-        .pushNamedAndRemoveUntil('/LearnScreen/', (route) => false);
+    var db = FirebaseFirestore.instance;
+    db.collection("phrases").get().then((event) {
+      for (var doc in event.docs) {
+        if (kDebugMode) {
+          print("${doc.id} => ${doc.data()}");
+        }
+        var data = doc.data();
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => NewPhrase(
+              phrase: Phrase(
+                videoUrl: data["videoUrl"],
+                phrase: data["phrase"],
+                meaning: data["meaning"],
+                srcLang: data["srcLang"],
+                dstLang: data["dstLang"],
+              ),
+            ),
+          ),
+        );
+        break;
+      }
+    });
   }
 
   @override
