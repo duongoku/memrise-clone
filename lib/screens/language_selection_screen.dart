@@ -19,9 +19,9 @@ class LanguageSelectionScreen extends StatefulWidget {
 }
 
 class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
-  static var languages = <String>[];
+  static var languages = <String>["English"];
 
-  String selectedLanguage = "";
+  String selectedLanguage = "English";
 
   TextStyle whiteText = const TextStyle(color: Colors.white, fontSize: 20);
   TextStyle blackText =
@@ -64,27 +64,28 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                 ),
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton(
-                      isExpanded: true,
-                      alignment: AlignmentDirectional.center,
-                      iconSize: 0.0,
-                      dropdownColor: CustomPalette.secondaryColor,
-                      items: languages.map((String language) {
-                        return DropdownMenuItem(
-                          value: language,
-                          child: Center(
-                            child: Text(
-                              language,
-                              style: blackText,
-                            ),
+                    isExpanded: true,
+                    alignment: AlignmentDirectional.center,
+                    iconSize: 0.0,
+                    dropdownColor: CustomPalette.secondaryColor,
+                    items: languages.map((String language) {
+                      return DropdownMenuItem(
+                        value: language,
+                        child: Center(
+                          child: Text(
+                            language,
+                            style: blackText,
                           ),
-                        );
-                      }).toList(),
-                      onChanged: (String? value) {
-                        setState(() {
-                          selectedLanguage = value!;
-                        });
-                      },
-                      value: selectedLanguage),
+                        ),
+                      );
+                    }).toList(),
+                    onChanged: (String? value) {
+                      setState(() {
+                        selectedLanguage = value!;
+                      });
+                    },
+                    value: selectedLanguage,
+                  ),
                 ),
               ),
             ),
