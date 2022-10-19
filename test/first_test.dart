@@ -15,7 +15,7 @@ void main() {
     await tester.pumpWidget(testWidget);
     await tester.tap(find.byType(ElevatedButton).first);
   });
-  
+
   testWidgets('Test getting started screen #2', (tester) async {
     startApp();
     Widget testWidget = const MediaQuery(

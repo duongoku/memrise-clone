@@ -1,7 +1,6 @@
-import 'package:demo/colors/custom_palette.dart';
-
 import 'dart:convert';
-
+import 'lesson_selection_screen.dart';
+import 'package:demo/colors/custom_palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -33,7 +32,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
     super.initState();
     loadLanguages().then((value) {
       setState(() {
-        languages =  List<String>.from(value);
+        languages = List<String>.from(value);
         selectedLanguage = languages[0];
       });
     });
@@ -109,8 +108,12 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                     child: TextButton(
                       child: Text(language, style: whiteText),
                       onPressed: () {
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                            '/LessonSelection/', (route) => false);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LessonSelectionScreen(),
+                          ),
+                        );
                       },
                     ),
                   ),

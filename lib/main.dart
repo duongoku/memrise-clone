@@ -1,14 +1,12 @@
+import '../firebase_options.dart';
 import 'package:demo/screens/getting_started_screen.dart';
 import 'package:demo/screens/language_selection_screen.dart';
 import 'package:demo/screens/learn_screen.dart';
 import 'package:demo/screens/lesson_selection_screen.dart';
 import 'package:demo/screens/register_screen.dart';
 import 'package:demo/screens/sign_in_screen.dart';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
-import '../firebase_options.dart';
 
 void startApp() {
   WidgetsFlutterBinding.ensureInitialized();

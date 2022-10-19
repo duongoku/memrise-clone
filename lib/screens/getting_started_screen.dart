@@ -1,4 +1,6 @@
 import 'package:demo/colors/custom_palette.dart';
+import 'package:demo/screens/language_selection_screen.dart';
+import 'package:demo/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 
 class GettingStarted extends StatelessWidget {
@@ -58,8 +60,13 @@ class GettingStarted extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                              '/LanguageSelection/', (route) => false);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const LanguageSelectionScreen(),
+                            ),
+                          );
                         },
                         child: const Text(
                           'Get started',
@@ -78,8 +85,13 @@ class GettingStarted extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                              '/SignInScreen/', (route) => false);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const RegisterScreen(isRegistering: false),
+                            ),
+                          );
                         },
                         child: const Text(
                           'I have an account',

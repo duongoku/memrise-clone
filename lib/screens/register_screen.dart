@@ -1,11 +1,9 @@
+import '../firebase_options.dart';
 import 'package:demo/colors/custom_palette.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
-
 import 'package:flutter/foundation.dart';
-
-import '../firebase_options.dart';
+import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
   final bool isRegistering;
@@ -89,7 +87,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             style: BorderStyle.none,
                           ),
                         ),
-                        contentPadding: const EdgeInsets.fromLTRB(20, 10, 0, 10),
+                        contentPadding:
+                            const EdgeInsets.fromLTRB(20, 10, 0, 10),
                         hintText: 'example@gmail.com',
                         hintStyle: TextStyle(
                             fontSize: 15.0, color: Colors.blueGrey[100]),
@@ -126,7 +125,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             style: BorderStyle.none,
                           ),
                         ),
-                        contentPadding: const EdgeInsets.fromLTRB(20, 10, 0, 10),
+                        contentPadding:
+                            const EdgeInsets.fromLTRB(20, 10, 0, 10),
                         hintText: 'Password',
                         hintStyle: TextStyle(
                             fontSize: 15.0, color: Colors.blueGrey[100]),
@@ -181,19 +181,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         if (widget.isRegistering) {
                           await FirebaseAuth.instance
                               .createUserWithEmailAndPassword(
-                                  email: email, password: password);
+                            email: email,
+                            password: password,
+                          );
                         } else {
                           await FirebaseAuth.instance
                               .signInWithEmailAndPassword(
-                                  email: email, password: password);
+                            email: email,
+                            password: password,
+                          );
                         }
-                        // redirect to login code here
-                        // Navigator.of(context).pushNamedAndRemoveUntil(
-                        //     '/LoginScreen/', (route) => false);
+
+                        if (!mounted) return;
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const RegisterScreen(isRegistering: false),
+                          ),
+                        );
                       },
                       child: Text(
                         widget.isRegistering ? 'Register' : 'Login',
-                        style: const TextStyle(color: Colors.white, fontSize: 20),
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 20),
                       ),
                     ),
                   ),
