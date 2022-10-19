@@ -1,4 +1,3 @@
-import 'package:demo/screens/getting_started_screen.dart';
 import 'package:demo/screens/language_selection_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
