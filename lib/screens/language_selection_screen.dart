@@ -1,7 +1,6 @@
-import 'package:demo/colors/custom_palette.dart';
-
 import 'dart:convert';
-
+import 'lesson_selection_screen.dart';
+import 'package:demo/colors/custom_palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -20,9 +19,9 @@ class LanguageSelectionScreen extends StatefulWidget {
 }
 
 class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
-  static var languages = <String>[];
+  static var languages = <String>["English"];
 
-  String selectedLanguage = "";
+  String selectedLanguage = "English";
 
   TextStyle whiteText = const TextStyle(color: Colors.white, fontSize: 20);
   TextStyle blackText =
@@ -33,7 +32,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
     super.initState();
     loadLanguages().then((value) {
       setState(() {
-        languages =  List<String>.from(value);
+        languages = List<String>.from(value);
         selectedLanguage = languages[0];
       });
     });
@@ -65,27 +64,28 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                 ),
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton(
-                      isExpanded: true,
-                      alignment: AlignmentDirectional.center,
-                      iconSize: 0.0,
-                      dropdownColor: CustomPalette.secondaryColor,
-                      items: languages.map((String language) {
-                        return DropdownMenuItem(
-                          value: language,
-                          child: Center(
-                            child: Text(
-                              language,
-                              style: blackText,
-                            ),
+                    isExpanded: true,
+                    alignment: AlignmentDirectional.center,
+                    iconSize: 0.0,
+                    dropdownColor: CustomPalette.secondaryColor,
+                    items: languages.map((String language) {
+                      return DropdownMenuItem(
+                        value: language,
+                        child: Center(
+                          child: Text(
+                            language,
+                            style: blackText,
                           ),
-                        );
-                      }).toList(),
-                      onChanged: (String? value) {
-                        setState(() {
-                          selectedLanguage = value!;
-                        });
-                      },
-                      value: selectedLanguage),
+                        ),
+                      );
+                    }).toList(),
+                    onChanged: (String? value) {
+                      setState(() {
+                        selectedLanguage = value!;
+                      });
+                    },
+                    value: selectedLanguage,
+                  ),
                 ),
               ),
             ),
@@ -109,8 +109,12 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                     child: TextButton(
                       child: Text(language, style: whiteText),
                       onPressed: () {
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                            '/LessonSelection/', (route) => false);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LessonSelectionScreen(),
+                          ),
+                        );
                       },
                     ),
                   ),
