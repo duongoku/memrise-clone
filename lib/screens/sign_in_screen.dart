@@ -1,8 +1,8 @@
 import "package:demo/colors/custom_palette.dart";
-
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_signin_button/flutter_signin_button.dart";
+import 'package:demo/screens/register_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -44,8 +44,12 @@ class _SignInSelectionScreenState extends State<SignInSelectionScreen> {
   }
 
   void navigateToSignInScreen() {
-    Navigator.of(context)
-        .pushNamedAndRemoveUntil('/SignInScreen/', (route) => false);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const RegisterScreen(isRegistering: false),
+      ),
+    );
   }
 
   @override

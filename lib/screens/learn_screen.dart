@@ -1,4 +1,5 @@
 import 'package:demo/colors/custom_palette.dart';
+import 'package:demo/screens/language_selection_screen.dart';
 import 'package:demo/screens/prefab.dart';
 import 'package:flutter/material.dart';
 
@@ -19,8 +20,14 @@ class _LearnScreenState extends State<LearnScreen> {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: CustomPalette.iconColor),
-          onPressed: () => Navigator.of(context)
-              .pushNamedAndRemoveUntil('/LessonSelection/', (route) => false),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const LanguageSelectionScreen(),
+              ),
+            );
+          },
         ),
         backgroundColor: CustomPalette.lighterPrimaryColor,
         actions: [

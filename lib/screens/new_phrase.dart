@@ -1,6 +1,5 @@
 import 'package:demo/colors/custom_palette.dart';
 import 'package:demo/screens/prefab.dart';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
