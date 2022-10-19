@@ -1,4 +1,4 @@
-name: Build apk
+name: Run flutter test
 
 on:
   push:
