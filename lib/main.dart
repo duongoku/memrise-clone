@@ -1,3 +1,5 @@
+import 'package:demo/screens/user_courses_screen.dart';
+
 import '../firebase_options.dart';
 import 'package:demo/screens/getting_started_screen.dart';
 import 'package:demo/screens/language_selection_screen.dart';
@@ -42,6 +44,7 @@ class MyApp extends StatelessWidget {
         '/SignInScreen/': (context) =>
             const RegisterScreen(isRegistering: false),
         '/SignInSelectionScreen/': (context) => const SignInSelectionScreen(),
+        '/UserCoursesScreen/': (context) => const UserCoursesScreen(),
       },
     );
   }
