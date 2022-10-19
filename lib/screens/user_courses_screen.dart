@@ -1,4 +1,5 @@
 import 'package:demo/colors/custom_palette.dart';
+import 'package:demo/screens/lesson_selection_screen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -12,15 +13,17 @@ class UserCoursesScreen extends StatefulWidget {
 class _UserCoursesScreenState extends State<UserCoursesScreen> {
   double iconSize = 50;
 
-  toLearnScreen() {
-    Navigator.of(context)
-        .pushNamedAndRemoveUntil('/LearnScreen/', (route) => false);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: CustomPalette.iconColor),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        leadingWidth: 25,
         backgroundColor: CustomPalette.lighterPrimaryColor,
         title: const Text("Courses"),
       ),
@@ -28,7 +31,7 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            padding: EdgeInsets.only(bottom: 40),
+            padding: const EdgeInsets.only(bottom: 40),
             child: SizedBox(
               width: 300,
               height: 45,
@@ -40,8 +43,7 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
                   ),
                 ),
                 onPressed: () {
-                  Navigator.of(context).pushNamed(
-                      '/LanguageSelection/');
+                  Navigator.of(context).pushNamed('/LanguageSelection/');
                 },
                 child: const Text(
                   'Learn a new course',
@@ -63,30 +65,35 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
           const SizedBox(
             height: 20,
           ),
-          Row(
-            children: [
-              ClipOval(
-                child: SizedBox.fromSize(
-                  size: Size.fromRadius(30), // Image radius
-                  child: Image.asset(
-                    "assets/images/japan_course_icon.jpg",
-                    fit: BoxFit.cover,
+          InkWell(
+            onTap: () {
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                      '/LessonSelection/', (route) => false);
+            },
+            child: Row(
+              children: [
+                ClipOval(
+                  child: SizedBox.fromSize(
+                    size: const Size.fromRadius(30), // Image radius
+                    child: Image.asset(
+                      "assets/images/japan_course_icon.jpg",
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              const Text(
-                'Japanese',
-                style: TextStyle(color: Colors.grey, fontSize: 20),
-              ),
-            ],
+                const SizedBox(
+                  width: 10,
+                ),
+                const Text(
+                  'Japanese',
+                  style: TextStyle(color: Colors.grey, fontSize: 20),
+                ),
+              ],
+            ),
           ),
           const SizedBox(
             height: 40,
           ),
-          
           const Text(
             'OTHER COURSES',
             style: TextStyle(color: Colors.grey, fontSize: 18),
@@ -94,27 +101,35 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
           const SizedBox(
             height: 20,
           ),
-          Row(
-            children: [
-              ClipOval(
-                child: SizedBox.fromSize(
-                  size: Size.fromRadius(30), // Image radius
-                  child: Image.asset(
-                    "assets/images/spain_course_icon.jpg",
-                    fit: BoxFit.cover,
+          InkWell(
+            onTap: () {
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                      '/LessonSelection/', (route) => false);
+            },
+            child: Row(
+              children: [
+                ClipOval(
+                  child: SizedBox.fromSize(
+                    size: const Size.fromRadius(30), // Image radius
+                    child: Image.asset(
+                      "assets/images/spain_course_icon.jpg",
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              const Text(
-                'Spanish',
-                style: TextStyle(color: Colors.grey, fontSize: 20),
-              ),
-            ],
+                const SizedBox(
+                  width: 10,
+                ),
+                const Text(
+                  'Spanish',
+                  style: TextStyle(color: Colors.grey, fontSize: 20),
+                ),
+              ],
+            ),
           ),
-          SizedBox(height: 10,),
+          const SizedBox(
+            height: 10,
+          ),
           const Divider(
             thickness: 1,
             color: Colors.blueGrey,
@@ -122,27 +137,32 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
           const SizedBox(
             height: 20,
           ),
-          Row(
-            children: [
-              ClipOval(
-                child: SizedBox.fromSize(
-                  size: Size.fromRadius(30), // Image radius
-                  child: Image.asset(
-                    "assets/images/germany_course_icon.jpg",
-                    fit: BoxFit.cover,
+          InkWell(
+            onTap: () {
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                      '/LessonSelection/', (route) => false);
+            },
+            child: Row(
+              children: [
+                ClipOval(
+                  child: SizedBox.fromSize(
+                    size: const Size.fromRadius(30), // Image radius
+                    child: Image.asset(
+                      "assets/images/germany_course_icon.jpg",
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              const Text(
-                'German',
-                style: TextStyle(color: Colors.grey, fontSize: 20),
-              ),
-            ],
+                const SizedBox(
+                  width: 10,
+                ),
+                const Text(
+                  'German',
+                  style: TextStyle(color: Colors.grey, fontSize: 20),
+                ),
+              ],
+            ),
           ),
-          
         ],
       ),
     );
