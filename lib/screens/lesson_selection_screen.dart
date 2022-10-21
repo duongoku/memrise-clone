@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/colors/custom_palette.dart';
 import 'package:demo/screens/new_phrase.dart';
+import 'package:demo/screens/user_courses_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -60,6 +61,22 @@ class _LessonSelectionScreenState extends State<LessonSelectionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(
+              Icons.menu,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const UserCoursesScreen(),
+                ),
+              );
+            },
+          )
+        ],
         backgroundColor: CustomPalette.lighterPrimaryColor,
         title: const Text("Lesson Selection"),
       ),
