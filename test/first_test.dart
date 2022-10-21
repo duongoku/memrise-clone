@@ -1,3 +1,4 @@
+import 'package:demo/screens/getting_started_screen.dart';
 import 'package:demo/screens/language_selection_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -11,22 +12,22 @@ void main() {
     setTesterWindowSize(tester);
   });
 
-  // group('Getting started screen', () {
-  //   Widget testWidget = const MediaQuery(
-  //     data: MediaQueryData(),
-  //     child: MaterialApp(home: GettingStarted()),
-  //   );
+  group('Getting started screen', () {
+    Widget testWidget = const MediaQuery(
+      data: MediaQueryData(),
+      child: MaterialApp(home: GettingStarted()),
+    );
 
-  //   testWidgets('Test getting started screen #1', (tester) async {
-  //     await tester.pumpWidget(testWidget);
-  //     await tester.tap(find.byType(ElevatedButton).first);
-  //   });
+    testWidgets('Test getting started screen #1', (tester) async {
+      await tester.pumpWidget(testWidget);
+      await tester.tap(find.byType(ElevatedButton).first);
+    });
 
-  //   testWidgets('Test getting started screen #2', (tester) async {
-  //     await tester.pumpWidget(testWidget);
-  //     await tester.tap(find.byType(ElevatedButton).last);
-  //   });
-  // });
+    testWidgets('Test getting started screen #2', (tester) async {
+      await tester.pumpWidget(testWidget);
+      await tester.tap(find.byType(ElevatedButton).last);
+    });
+  });
 
   group('Language selection screen', () {
     Widget testWidget = const MediaQuery(
