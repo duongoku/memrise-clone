@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:demo/screens/getting_started_screen.dart';
 import 'package:demo/screens/language_selection_screen.dart';
 import 'package:demo/screens/lesson_selection_screen.dart';
