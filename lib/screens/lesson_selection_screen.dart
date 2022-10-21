@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/colors/custom_palette.dart';
 import 'package:demo/screens/new_phrase.dart';
 import 'package:demo/screens/user_courses_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -30,8 +31,7 @@ class _LessonSelectionScreenState extends State<LessonSelectionScreen> {
     SizedBox(height: 10),
   ]);
 
-  toLearnScreen() {
-    var db = FirebaseFirestore.instance;
+  makeNewLearnScreen(FirebaseFirestore db) {
     db.collection("phrases").get().then((event) {
       for (var doc in event.docs) {
         if (kDebugMode) {
@@ -55,6 +55,17 @@ class _LessonSelectionScreenState extends State<LessonSelectionScreen> {
         break;
       }
     });
+  }
+
+  Future<void> toLearnScreen() async {
+    try {
+      FirebaseFirestore db = FirebaseFirestore.instance;
+      makeNewLearnScreen(db);
+    } on Exception {
+      await Firebase.initializeApp();
+      FirebaseFirestore db = FirebaseFirestore.instance;
+      makeNewLearnScreen(db);
+    }
   }
 
   @override
