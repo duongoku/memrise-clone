@@ -1,4 +1,5 @@
 import 'package:demo/colors/custom_palette.dart';
+import 'package:demo/screens/language_selection_screen.dart';
 import 'package:demo/screens/lesson_selection_screen.dart';
 
 import 'package:flutter/material.dart';
@@ -43,7 +44,12 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
                   ),
                 ),
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/LanguageSelection/');
+                  Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const LanguageSelectionScreen()
+                ),
+              );
                 },
                 child: const Text(
                   'Learn a new course',
@@ -67,8 +73,12 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
           ),
           InkWell(
             onTap: () {
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                      '/LessonSelection/', (route) => false);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const LessonSelectionScreen()
+                ),
+              );
             },
             child: Row(
               children: [
@@ -103,8 +113,12 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
           ),
           InkWell(
             onTap: () {
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                      '/LessonSelection/', (route) => false);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const LessonSelectionScreen()
+                ), //todo 
+              );
             },
             child: Row(
               children: [
@@ -140,7 +154,7 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
           InkWell(
             onTap: () {
               Navigator.of(context).pushNamedAndRemoveUntil(
-                      '/LessonSelection/', (route) => false);
+                  '/LessonSelection/', (route) => false);
             },
             child: Row(
               children: [

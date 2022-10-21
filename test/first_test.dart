@@ -4,12 +4,14 @@ import 'package:demo/screens/language_selection_screen.dart';
 import 'package:demo/screens/lesson_selection_screen.dart';
 import 'package:demo/screens/new_phrase.dart';
 import 'package:demo/screens/prefab.dart';
+import 'package:demo/screens/register_screen.dart';
+import 'package:demo/screens/user_courses_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   void setTesterWindowSize(tester) {
-    tester.binding.window.physicalSizeTestValue = const Size(1440, 3040);
+    tester.binding.window.physicalSizeTestValue = const Size(1440, 10000);
   }
 
   testWidgets('Initial test to ensure everything is normal', (tester) async {
@@ -95,5 +97,46 @@ void main() {
       await tester.pumpWidget(testWidget);
       await tester.tap(find.byType(TextButton).first);
     });
+  });
+
+  group('Lesson selection screen', () {
+    Widget testWidget = const MediaQuery(
+      data: MediaQueryData(),
+      child: MaterialApp(home: UserCoursesScreen()),
+    );
+
+    testWidgets('Test back button', (tester) async {
+      await tester.pumpWidget(testWidget);
+      await tester.tap(find.byType(IconButton).first);
+    });
+    testWidgets('Test learn a new course button', (tester) async {
+      await tester.pumpWidget(testWidget);
+      await tester.tap(find.byType(ElevatedButton).first);
+    });
+
+    testWidgets('Test courses', (tester) async {
+      await tester.pumpWidget(testWidget);
+      await tester.tap(find.byType(InkWell).first);
+    });
+  });
+
+  group('Register screen', () {
+    Widget testWidget = const MediaQuery(
+      data: MediaQueryData(),
+      child: MaterialApp(
+          home: RegisterScreen(
+        isRegistering: true,
+      )),
+    );
+
+    testWidgets('Test redirect button', (tester) async {
+      await tester.pumpWidget(testWidget);
+      await tester.tap(find.byType(TextButton).first);
+    });
+
+    // testWidgets('Test register/login button', (tester) async {
+    //   await tester.pumpWidget(testWidget);
+    //   await tester.tap(find.byType(ElevatedButton).first);
+    // });
   });
 }

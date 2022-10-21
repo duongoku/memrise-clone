@@ -70,6 +70,12 @@ Video demo:
 
 APK available [here](https://github.com/duongoku/random-flutter/releases/tag/v0.0.1-alpha)
 
+### Week 7
+
+Test report
+
+![Test report](/preview/test_report.png)
+
 ## 📢Releases
 
 -   Checkout [releases](https://github.com/duongoku/random-flutter/releases)
