@@ -2,6 +2,7 @@ import "package:demo/colors/custom_palette.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_signin_button/flutter_signin_button.dart";
+import 'package:demo/firebase_options.dart';
 import 'package:demo/screens/register_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,7 +27,9 @@ class _SignInSelectionScreenState extends State<SignInSelectionScreen> {
 
   Future<void> signInWithEmail(String emailAddress, String password) async {
     try {
-      await Firebase.initializeApp();
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailAddress.trim(), password: password);
       if (kDebugMode) {

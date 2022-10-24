@@ -1,8 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/colors/custom_palette.dart';
+import 'package:demo/main.dart';
 import 'package:demo/screens/new_phrase.dart';
 import 'package:demo/screens/user_courses_screen.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -20,19 +19,21 @@ class _LessonSelectionScreenState extends State<LessonSelectionScreen> {
     height: 75,
   );
 
-  var threeVerticalDots =
-      Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: const [
-    SizedBox(height: 10),
-    Icon(Icons.circle, color: Colors.white, size: 10),
-    SizedBox(height: 5),
-    Icon(Icons.circle, color: Colors.white, size: 10),
-    SizedBox(height: 5),
-    Icon(Icons.circle, color: Colors.white, size: 10),
-    SizedBox(height: 10),
-  ]);
+  var threeVerticalDots = Column(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: const [
+      SizedBox(height: 10),
+      Icon(Icons.circle, color: Colors.white, size: 10),
+      SizedBox(height: 5),
+      Icon(Icons.circle, color: Colors.white, size: 10),
+      SizedBox(height: 5),
+      Icon(Icons.circle, color: Colors.white, size: 10),
+      SizedBox(height: 10),
+    ],
+  );
 
-  makeNewLearnScreen(FirebaseFirestore db) {
-    db.collection("phrases").get().then((event) {
+  Future<void> toLearnScreen() async {
+    MyApp.firestore.collection("phrases").get().then((event) {
       for (var doc in event.docs) {
         if (kDebugMode) {
           print("${doc.id} => ${doc.data()}");
@@ -55,17 +56,6 @@ class _LessonSelectionScreenState extends State<LessonSelectionScreen> {
         break;
       }
     });
-  }
-
-  Future<void> toLearnScreen() async {
-    try {
-      FirebaseFirestore db = FirebaseFirestore.instance;
-      makeNewLearnScreen(db);
-    } on Exception {
-      await Firebase.initializeApp();
-      FirebaseFirestore db = FirebaseFirestore.instance;
-      makeNewLearnScreen(db);
-    }
   }
 
   @override

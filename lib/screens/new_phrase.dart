@@ -48,9 +48,6 @@ class _NewPhraseState extends State<NewPhrase> {
   @override
   void initState() {
     super.initState();
-    if (kDebugMode) {
-      print(widget.phrase.videoUrl);
-    }
     videoController = VideoPlayerController.network(widget.phrase.videoUrl)
       ..initialize().then((_) {
         setState(() {
