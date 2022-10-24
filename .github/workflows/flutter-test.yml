@@ -1,4 +1,4 @@
-name: Run flutter test
+name: Test
 
 on:
   push:
