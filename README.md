@@ -1,7 +1,28 @@
-# ⚡memrise-clone
+<div align="center">
+  <h1>⚡memrise-clone</h1>
+  <i>A flutter app for class INT3120 40</i>
+  <br/>
+  <i>This app is an attempt to clone <a href="https://play.google.com/store/apps/details?id=com.memrise.android.memrisecompanion">Memrise</a></i>
+</div>
 
-A flutter app for class INT3120 40.
-This app is a clone of [Memrise](https://play.google.com/store/apps/details?id=com.memrise.android.memrisecompanion).
+<br/>
+
+<div align="center">
+  <a href="https://github.com/duongoku/memrise-clone/issues">
+    <img alt="GitHub issues" src="https://img.shields.io/github/issues/duongoku/memrise-clone">
+  </a>
+  <a href="https://github.com/duongoku/memrise-clone/actions/workflows/flutter-analyze.yml">
+    <img alt="Validate links" src="https://github.com/duongoku/memrise-clone/actions/workflows/flutter-analyze.yml/badge.svg"/>
+  </a>
+  <a href="https://github.com/duongoku/memrise-clone/actions/workflows/flutter-test.yml">
+    <img alt="Validate links" src="https://github.com/duongoku/memrise-clone/actions/workflows/flutter-test.yml/badge.svg"/>
+  </a>
+  <a href="https://github.com/duongoku/memrise-clone/actions/workflows/flutter-build.yml">
+    <img alt="Validate links" src="https://github.com/duongoku/memrise-clone/actions/workflows/flutter-build.yml/badge.svg"/>
+  </a>
+</div>
+
+<br/>
 
 - [⚡memrise-clone](#memrise-clone)
   - [👪Members](#members)
