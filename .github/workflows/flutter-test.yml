@@ -7,7 +7,7 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,9 +16,7 @@ jobs:
         with:
           flutter-version: '3.0.5'
           channel: 'master'
-      - name: Build apk
+      - name: Run tests
         run: flutter test
       - uses: codecov/codecov-action@v3
-        with:
-          files: ./coverage/lcov.info
       
