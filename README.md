@@ -11,6 +11,9 @@
   <a href="https://github.com/duongoku/memrise-clone/issues">
     <img alt="GitHub issues" src="https://img.shields.io/github/issues/duongoku/memrise-clone">
   </a>
+  <a href="https://app.codecov.io/github/duongoku/memrise-clone">
+    <img alt="Codecov" src="https://img.shields.io/codecov/c/github/duongoku/memrise-clone">
+  </a>
   <a href="https://github.com/duongoku/memrise-clone/actions/workflows/flutter-analyze.yml">
     <img alt="Validate links" src="https://github.com/duongoku/memrise-clone/actions/workflows/flutter-analyze.yml/badge.svg"/>
   </a>
