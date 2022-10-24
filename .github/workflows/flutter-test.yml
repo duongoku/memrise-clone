@@ -16,6 +16,9 @@ jobs:
         with:
           flutter-version: '3.0.5'
           channel: 'master'
+      - uses: codecov/codecov-action@v3
+        with:
+          files: ./coverage/lcov.info
       - name: Build apk
         run: flutter test
       
