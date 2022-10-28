@@ -1,13 +1,16 @@
 import 'package:demo/main.dart';
 import 'package:demo/screens/getting_started_screen.dart';
 import 'package:demo/screens/language_selection_screen.dart';
+import 'package:demo/screens/learn_screen.dart';
 import 'package:demo/screens/lesson_selection_screen.dart';
 import 'package:demo/screens/new_phrase.dart';
 import 'package:demo/screens/prefab.dart';
 import 'package:demo/screens/register_screen.dart';
+import 'package:demo/screens/sign_in_screen.dart';
 import 'package:demo/screens/user_courses_screen.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/button_view.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 const phrasesCollection = 'phrases';
@@ -117,7 +120,7 @@ class TestApp {
       });
     });
 
-    group('Lesson selection screen', () {
+    group('User courses screen', () {
       Widget testWidget = const MediaQuery(
         data: MediaQueryData(),
         child: MaterialApp(home: UserCoursesScreen()),
@@ -152,12 +155,38 @@ class TestApp {
         await tester.tap(find.byType(TextButton).first);
       });
 
-      // testWidgets('Test register/login button', (tester) async {
-      //   await tester.pumpWidget(testWidget);
-      //   await tester.tap(find.byType(ElevatedButton).first);
-      // });
+    });
+
+    group('Sign in selection screen', () {
+      Widget testWidget = const MediaQuery(
+        data: MediaQueryData(),
+        child: MaterialApp(home: SignInSelectionScreen()),
+      );
+
+      testWidgets('Test signin buttons', (tester) async {
+        await tester.pumpWidget(testWidget);
+        await tester.tap(find.byType(SignInButton).first);
+      });
+    });
+
+    group('Learn screen', () {
+      Widget testWidget = const MediaQuery(
+        data: MediaQueryData(),
+        child: MaterialApp(home: LearnScreen()),
+      );
+
+      testWidgets('Test back button', (tester) async {
+        await tester.pumpWidget(testWidget);
+        await tester.tap(find.byType(IconButton).first);
+      });
+
+      testWidgets('Test OK button', (tester) async {
+        await tester.pumpWidget(testWidget);
+        await tester.tap(find.byType(CustomElevatedButton).first);
+      });
     });
   }
+  
 }
 
 void main() {
