@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>⚡memrise-clone</h1>
+  <h1>🧠memrise-clone</h1>
   <i>A flutter app for class INT3120 40</i>
   <br/>
   <i>This app is an attempt to clone <a href="https://play.google.com/store/apps/details?id=com.memrise.android.memrisecompanion">Memrise</a></i>
