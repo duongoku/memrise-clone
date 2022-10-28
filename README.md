@@ -27,15 +27,16 @@
 
 <br/>
 
-- [⚡memrise-clone](#memrise-clone)
-  - [👪Members](#members)
-  - [💿Prerequisites](#prerequisites)
-  - [🏃Run](#run)
-  - [📷Preview](#preview)
-    - [Week 3](#week-3)
-    - [Week 4](#week-4)
-    - [Week 5](#week-5)
-  - [📢Releases](#releases)
+- [👪Members](#members)
+- [💿Prerequisites](#prerequisites)
+- [🏃Run](#run)
+- [📷Preview](#preview)
+  - [Week 3](#week-3)
+  - [Week 4](#week-4)
+  - [Week 5](#week-5)
+  - [Week 7](#week-7)
+  - [Week 8](#week-8)
+- [📢Releases](#releases)
 
 ## 👪Members
 
@@ -99,6 +100,12 @@ APK available [here](https://github.com/duongoku/random-flutter/releases/tag/v0.
 Test report
 
 ![Test report](/preview/test_report.png)
+
+### Week 8
+
+Monkey test
+
+![Monkey test](/preview/monkey50.png)
 
 ## 📢Releases
 
