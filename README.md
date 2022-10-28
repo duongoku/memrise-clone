@@ -105,7 +105,7 @@ Test report
 
 Monkey test
 
-![Monkey test](/preview/monkey50.png)
+![Monkey test](/preview/monkey500.png)
 
 ## 📢Releases
 
