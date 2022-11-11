@@ -1,3 +1,6 @@
+import 'package:demo/screens/language_selection_screen.dart';
+import 'package:demo/screens/lesson_selection_screen.dart';
+
 import '../firebase_options.dart';
 import 'package:demo/colors/custom_palette.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -196,8 +199,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                const RegisterScreen(isRegistering: false),
+                            builder: (context) => const LanguageSelectionScreen(),
                           ),
                         );
                       },
