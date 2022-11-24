@@ -37,6 +37,7 @@ abstract class Prefab {
   );
   static const phraseStyle = TextStyle(color: Colors.white, fontSize: 24);
   static const srcStyle = TextStyle(color: Colors.grey, fontSize: 12);
+  static const vPadding5 = SizedBox(height: 5);
   static const vPadding10 = SizedBox(height: 10);
   static const vPadding15 = SizedBox(height: 15);
   static const vPadding25 = SizedBox(height: 25);
@@ -48,4 +49,11 @@ abstract class Prefab {
   static const vPadding150 = SizedBox(height: 150);
   static const vPadding175 = SizedBox(height: 175);
   static const vPadding200 = SizedBox(height: 200);
+  static const hPadding5 = SizedBox(width: 5);
+  static const hPadding10 = SizedBox(width: 10);
+  static const hPadding15 = SizedBox(width: 15);
+  static const hPadding20 = SizedBox(width: 20);
+  static const hPadding25 = SizedBox(width: 25);
+  static const hPadding30 = SizedBox(width: 30);
+  static const hPadding35 = SizedBox(width: 35);
 }
