@@ -1,5 +1,8 @@
 import 'package:demo/colors/custom_palette.dart';
+import 'package:demo/constants.dart';
+import 'package:demo/screens/new_phrase.dart';
 import 'package:demo/screens/user_courses_screen.dart';
+
 import 'package:flutter/material.dart';
 
 class LessonSelectionScreen extends StatefulWidget {
@@ -30,29 +33,25 @@ class _LessonSelectionScreenState extends State<LessonSelectionScreen> {
   );
 
   Future<void> toLearnScreen() async {
-    // MyApp.firestore.collection("phrases").get().then((event) {
-    //   for (var doc in event.docs) {
-    //     if (kDebugMode) {
-    //       print("${doc.id} => ${doc.data()}");
-    //     }
-    //     var data = doc.data();
-    //     Navigator.push(
-    //       context,
-    //       MaterialPageRoute(
-    //         builder: (context) => NewPhrase(
-    //           phrase: Phrase(
-    //             videoUrl: data["videoUrl"],
-    //             phrase: data["phrase"],
-    //             meaning: data["meaning"],
-    //             srcLang: data["srcLang"],
-    //             dstLang: data["dstLang"],
-    //           ),
-    //         ),
-    //       ),
-    //     );
-    //     break;
-    //   }
-    // });
+    supabase.from("phrases").select("*").then((rows) {
+      for (var row in rows) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => NewPhrase(
+              phrase: Phrase(
+                videoUrl: row["videoUrl"],
+                phrase: row["phrase"],
+                meaning: row["meaning"],
+                srcLang: row["srcLang"],
+                dstLang: row["dstLang"],
+              ),
+            ),
+          ),
+        );
+        break;
+      }
+    });
   }
 
   @override
