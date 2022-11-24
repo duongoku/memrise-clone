@@ -13,6 +13,9 @@ class LessonSelectionScreen extends StatefulWidget {
 }
 
 class _LessonSelectionScreenState extends State<LessonSelectionScreen> {
+  static const learnButtonHeight = 65.0;
+  static const learnButtonWidth = 165.0;
+
   var memriseIcon = Image.asset(
     "assets/images/round_logo.png",
     width: 75,
@@ -57,88 +60,108 @@ class _LessonSelectionScreenState extends State<LessonSelectionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(
-              Icons.menu,
-              color: Colors.white,
+        appBar: AppBar(
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(
+                Icons.menu,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const UserCoursesScreen(),
+                  ),
+                );
+              },
+            )
+          ],
+          backgroundColor: CustomPalette.lighterPrimaryColor,
+          title: const Text("Lesson Selection"),
+        ),
+        backgroundColor: CustomPalette.primaryColor,
+        body: ListView(
+          padding: const EdgeInsets.only(
+            top: 20,
+            bottom: learnButtonHeight + 20,
+          ),
+          children: [
+            memriseIcon,
+            TextButton(
+              onPressed: toLearnScreen,
+              child: const Text(
+                "1 - Words and Phrases",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
             ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const UserCoursesScreen(),
+            TextButton(
+              onPressed: toLearnScreen,
+              child: const Text(
+                "The basics 1",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            threeVerticalDots,
+            memriseIcon,
+            TextButton(
+              onPressed: toLearnScreen,
+              child: const Text(
+                "2 - Grammar",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+            ),
+            TextButton(
+              onPressed: toLearnScreen,
+              child: const Text(
+                "How to sound polite",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            threeVerticalDots,
+            memriseIcon,
+            TextButton(
+              onPressed: toLearnScreen,
+              child: const Text(
+                "3 - Words and Phrases",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+            ),
+            TextButton(
+              onPressed: toLearnScreen,
+              child: const Text(
+                "The basics 2",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
                 ),
-              );
-            },
-          )
-        ],
-        backgroundColor: CustomPalette.lighterPrimaryColor,
-        title: const Text("Lesson Selection"),
-      ),
-      backgroundColor: CustomPalette.primaryColor,
-      body: ListView(
-        padding: const EdgeInsets.only(top: 20),
-        children: [
-          memriseIcon,
-          TextButton(
-            onPressed: toLearnScreen,
-            child: const Text(
-              "1 - Words and Phrases",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
             ),
-          ),
-          TextButton(
+          ],
+        ),
+        floatingActionButton: SizedBox(
+          width: learnButtonWidth,
+          height: learnButtonHeight,
+          child: FloatingActionButton.extended(
             onPressed: toLearnScreen,
-            child: const Text(
-              "The basics 1",
+            label: const Text(
+              "Learn",
               style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
+                color: Colors.white,
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+              ),
             ),
+            icon: const Icon(Icons.draw, size: 28),
+            backgroundColor: CustomPalette.dimmedSecondaryColor,
           ),
-          threeVerticalDots,
-          memriseIcon,
-          TextButton(
-            onPressed: toLearnScreen,
-            child: const Text(
-              "2 - Grammar",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-          ),
-          TextButton(
-            onPressed: toLearnScreen,
-            child: const Text(
-              "How to sound polite",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
-          threeVerticalDots,
-          memriseIcon,
-          TextButton(
-            onPressed: toLearnScreen,
-            child: const Text(
-              "3 - Words and Phrases",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-          ),
-          TextButton(
-            onPressed: toLearnScreen,
-            child: const Text(
-              "The basics 2",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
-        ],
-      ),
-    );
+        ));
   }
 }
