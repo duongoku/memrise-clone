@@ -191,7 +191,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           child: TextButton(
                             onPressed: (() {
                               if (kDebugMode) {
-                                print('redirect to login');
+                                print('Redirecting to login');
                               }
                             }),
                             child: const Text(
