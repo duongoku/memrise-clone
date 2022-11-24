@@ -3,26 +3,15 @@ import 'package:demo/screens/prefab.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
-class Phrase {
-  final String videoUrl;
-  final String phrase;
-  final String meaning;
-  final String srcLang;
-  final String dstLang;
-
-  Phrase({
-    required this.videoUrl,
-    required this.phrase,
-    required this.meaning,
-    required this.srcLang,
-    required this.dstLang,
-  });
-}
-
 class NewPhrase extends StatefulWidget {
-  final Phrase phrase;
+  final dynamic words;
+  final int currentWordIndex;
 
-  const NewPhrase({super.key, required this.phrase});
+  const NewPhrase({
+    super.key,
+    required this.words,
+    required this.currentWordIndex,
+  });
 
   @override
   State<NewPhrase> createState() => _NewPhraseState();
@@ -37,6 +26,8 @@ class _NewPhraseState extends State<NewPhrase> {
 
   late VideoPlayerController videoController;
 
+  dynamic currentWord;
+
   void replayVideo() {
     setState(() {
       videoController.seekTo(const Duration(seconds: 0));
@@ -47,7 +38,8 @@ class _NewPhraseState extends State<NewPhrase> {
   @override
   void initState() {
     super.initState();
-    videoController = VideoPlayerController.network(widget.phrase.videoUrl)
+    currentWord = widget.words[widget.currentWordIndex];
+    videoController = VideoPlayerController.network(currentWord["videoUrl"])
       ..initialize().then((_) {
         setState(() {
           videoController.play();
@@ -61,7 +53,6 @@ class _NewPhraseState extends State<NewPhrase> {
       appBar: AppBar(
         backgroundColor: CustomPalette.lighterPrimaryColor,
         foregroundColor: CustomPalette.lightGreen,
-        leading: const Icon(Icons.close),
         actions: [
           Container(
             margin: const EdgeInsets.only(right: 20),
@@ -93,25 +84,25 @@ class _NewPhraseState extends State<NewPhrase> {
           ),
           Prefab.vPadding35,
           Text(
-            widget.phrase.srcLang,
+            currentWord["srcLang"],
             style: srcStyle,
             textAlign: TextAlign.center,
           ),
           Prefab.vPadding15,
           Text(
-            widget.phrase.phrase,
+            currentWord["phrase"],
             style: phraseStyle,
             textAlign: TextAlign.center,
           ),
           Prefab.vPadding35,
           Text(
-            widget.phrase.dstLang,
+            currentWord["dstLang"],
             style: srcStyle,
             textAlign: TextAlign.center,
           ),
           Prefab.vPadding15,
           Text(
-            widget.phrase.meaning,
+            currentWord["meaning"],
             style: meaningStyle,
             textAlign: TextAlign.center,
           ),
