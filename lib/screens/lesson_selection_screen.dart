@@ -48,8 +48,8 @@ class _LessonSelectionScreenState extends State<LessonSelectionScreen> {
     });
   }
 
-  Future<void> toWordListScreen() async {
-    supabase.from("phrases").select("*").then((rows) {
+  Future<void> toWordListScreen(int lessonId) async {
+    supabase.from("phrases").select("*").eq("lesson", lessonId).then((rows) {
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -60,6 +60,38 @@ class _LessonSelectionScreenState extends State<LessonSelectionScreen> {
         ),
       );
     });
+  }
+
+  List<Widget> getLessonsFromSnapshot(AsyncSnapshot snapshot) {
+    List<Widget> lessons = [];
+    int count = 0;
+    for (var lesson in snapshot.data) {
+      count++;
+      lessons.add(memriseIcon);
+      lessons.add(TextButton(
+        onPressed: () => toWordListScreen(lesson["id"]),
+        child: Text(
+          "$count - ${lesson['type']}",
+          style: const TextStyle(color: Colors.white, fontSize: 20),
+        ),
+      ));
+      lessons.add(TextButton(
+        onPressed: () => toWordListScreen(lesson["id"]),
+        child: Text(
+          lesson["name"],
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ));
+      lessons.add(threeVerticalDots);
+    }
+    if (lessons.isNotEmpty) {
+      lessons.removeLast();
+    }
+    return lessons;
   }
 
   @override
@@ -86,70 +118,17 @@ class _LessonSelectionScreenState extends State<LessonSelectionScreen> {
         title: const Text("Lesson Selection"),
       ),
       backgroundColor: CustomPalette.primaryColor,
-      body: ListView(
-        padding: const EdgeInsets.only(
-          top: 20,
-          bottom: learnButtonHeight + 20,
-        ),
-        children: [
-          memriseIcon,
-          TextButton(
-            onPressed: toWordListScreen,
-            child: const Text(
-              "1 - Words and Phrases",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+      body: FutureBuilder(
+        future: supabase.from("lessons").select("*"),
+        builder: (context, snapshot) {
+          return ListView(
+            padding: const EdgeInsets.only(
+              top: 20,
+              bottom: learnButtonHeight + 20,
             ),
-          ),
-          TextButton(
-            onPressed: toWordListScreen,
-            child: const Text(
-              "The basics 1",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
-          threeVerticalDots,
-          memriseIcon,
-          TextButton(
-            onPressed: toWordListScreen,
-            child: const Text(
-              "2 - Grammar",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-          ),
-          TextButton(
-            onPressed: toWordListScreen,
-            child: const Text(
-              "How to sound polite",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
-          threeVerticalDots,
-          memriseIcon,
-          TextButton(
-            onPressed: toWordListScreen,
-            child: const Text(
-              "3 - Words and Phrases",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-          ),
-          TextButton(
-            onPressed: toWordListScreen,
-            child: const Text(
-              "The basics 2",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ],
+            children: getLessonsFromSnapshot(snapshot),
+          );
+        },
       ),
       floatingActionButton: SizedBox(
         width: learnButtonWidth,
