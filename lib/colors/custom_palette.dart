@@ -11,4 +11,5 @@ class CustomPalette {
   static const Color brown = Color.fromARGB(255, 122, 45, 21);
   static const Color textField = Color.fromARGB(255, 57, 70, 87);
   static const Color lightGreen = Color.fromARGB(255, 76, 180, 161);
+  static const Color errorColor = Colors.red;
 }

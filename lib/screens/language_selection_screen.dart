@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:demo/screens/register_screen.dart';
+
 import 'lesson_selection_screen.dart';
 import 'package:demo/colors/custom_palette.dart';
 import 'package:flutter/material.dart';
@@ -112,7 +114,9 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const LessonSelectionScreen(),
+                            builder: (context) => const RegisterScreen(
+                              isRegistering: true,
+                            ),
                           ),
                         );
                       },

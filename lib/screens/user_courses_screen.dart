@@ -1,13 +1,10 @@
 import 'package:demo/colors/custom_palette.dart';
+import 'package:demo/constants.dart';
+import 'package:demo/main.dart';
 import 'package:demo/screens/language_selection_screen.dart';
 import 'package:demo/screens/lesson_selection_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';
-
-import '../main.dart';
 
 class UserCoursesScreen extends StatefulWidget {
   const UserCoursesScreen({super.key});
@@ -66,11 +63,7 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
       ),
       backgroundColor: CustomPalette.primaryColor,
       body: FutureBuilder(
-          future: MyApp.firestore
-              .collection("userData")
-              .doc(
-                  "2hXXKfAFB9Q4sgvKKXRrUwrv9Ly1") //todo change to FirebaseAuth.instance.currentUser?.uid
-              .get(),
+          future: supabase.from('profiles').select('*').execute(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(

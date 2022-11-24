@@ -1,41 +1,15 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:demo/firebase_options.dart';
-import 'package:demo/screens/getting_started_screen.dart';
-import 'package:demo/screens/language_selection_screen.dart';
-import 'package:demo/screens/learn_screen.dart';
-import 'package:demo/screens/lesson_selection_screen.dart';
-import 'package:demo/screens/register_screen.dart';
-import 'package:demo/screens/sign_in_screen.dart';
-import 'package:demo/screens/user_courses_screen.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:demo/screens/all_screens.dart';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-void startApp() {
-  WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
-}
-
-void main() {
-  startApp();
-}
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  static late FirebaseFirestore firestore;
-
-  static void initFirebase() async {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-    firestore = FirebaseFirestore.instance;
-  }
-
   @override
   Widget build(BuildContext context) {
-    // This need to be awaited but I'm too lazy to do it
-    initFirebase();
-
     const appTitle = 'Memrise';
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -57,4 +31,40 @@ class MyApp extends StatelessWidget {
       },
     );
   }
+}
+
+void startApp() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const MyApp());
+}
+
+String checkDotEnv(List<String> keys) {
+  for (final key in keys) {
+    if (dotenv.env[key] == null) {
+      return "Missing $key in .env file";
+    }
+  }
+  return "";
+}
+
+Future main() async {
+  await dotenv.load();
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Make sure all environment variables are set
+  List<String> requiredEnv = ["SUPABASE_URL", "SUPABASE_ANON_KEY"];
+  String checkResult = checkDotEnv(requiredEnv);
+  if (checkResult.startsWith("Missing")) {
+    if (kDebugMode) {
+      print(checkResult);
+    }
+    return;
+  }
+
+  await Supabase.initialize(
+    url: dotenv.env['SUPABASE_URL']!,
+    anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
+  );
+
+  startApp();
 }

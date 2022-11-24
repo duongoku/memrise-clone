@@ -1,12 +1,12 @@
-import 'package:demo/screens/language_selection_screen.dart';
+import 'dart:async';
+
+import 'package:demo/colors/custom_palette.dart';
+import 'package:demo/constants.dart';
 import 'package:demo/screens/lesson_selection_screen.dart';
 
-import '../firebase_options.dart';
-import 'package:demo/colors/custom_palette.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class RegisterScreen extends StatefulWidget {
   final bool isRegistering;
@@ -18,26 +18,74 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  TextEditingController? _email;
-  TextEditingController? _password;
-
   static const double containerWidth = 250;
   static const double logoWidth = 150;
   static const double buttonHeigth = 45;
   static const double textFieldHeigth = 50;
 
+  late final StreamSubscription<AuthState> _authStateSubscription;
+  late final TextEditingController _emailController;
+  late final TextEditingController _passwordController;
+  bool _isLoading = false;
+  bool _redirecting = false;
+
   @override
   void initState() {
-    _email = TextEditingController();
-    _password = TextEditingController();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+    _authStateSubscription = supabase.auth.onAuthStateChange.listen((event) {
+      if (_redirecting) return;
+
+      final session = event.session;
+
+      if (session != null) {
+        _redirecting = true;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const LessonSelectionScreen(),
+          ),
+        );
+      }
+    });
+
     super.initState();
   }
 
   @override
-  void dispose() {
-    _email?.dispose();
-    _password?.dispose();
+  dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _authStateSubscription.cancel();
     super.dispose();
+  }
+
+  Future<void> _signInWithPassword(
+      String email, String password, bool isSignUp) async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      String successMessage = "Check your email for login link!";
+      if (isSignUp) {
+        await supabase.auth.signUp(email: email, password: password);
+      } else {
+        await supabase.auth
+            .signInWithPassword(email: email, password: password);
+        successMessage = "Logged in successfully!";
+      }
+      if (!mounted) return;
+      context.showSnackBar(message: successMessage);
+    } on AuthException catch (error) {
+      context.showErrorSnackBar(message: error.message);
+    } catch (error) {
+      context.showErrorSnackBar(message: "Unexpected error: $error");
+    }
+
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   @override
@@ -74,7 +122,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   SizedBox(
                     height: textFieldHeigth,
                     child: TextField(
-                      controller: _email,
+                      controller: _emailController,
                       style: const TextStyle(
                           fontSize: 15.0,
                           color: Colors.white,
@@ -109,7 +157,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   SizedBox(
                     height: textFieldHeigth,
                     child: TextField(
-                      controller: _password,
+                      controller: _passwordController,
                       obscureText: true,
                       enableSuggestions: false,
                       autocorrect: false,
@@ -160,58 +208,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ],
               ),
             ),
-            FutureBuilder(
-              future: Firebase.initializeApp(
-                options: DefaultFirebaseOptions.currentPlatform,
-              ),
-              builder: (context, snapshot) {
-                return SizedBox(
-                  width: containerWidth,
-                  child: SizedBox(
-                    width: containerWidth,
-                    height: buttonHeigth,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: CustomPalette.brown,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                      ),
-                      onPressed: () async {
-                        final email = _email!.text;
-                        final password = _password!.text;
-
-                        if (widget.isRegistering) {
-                          await FirebaseAuth.instance
-                              .createUserWithEmailAndPassword(
-                            email: email,
-                            password: password,
-                          );
-                        } else {
-                          await FirebaseAuth.instance
-                              .signInWithEmailAndPassword(
-                            email: email,
-                            password: password,
-                          );
-                        }
-
-                        if (!mounted) return;
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const LanguageSelectionScreen(),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        widget.isRegistering ? 'Register' : 'Login',
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 20),
-                      ),
+            SizedBox(
+              width: containerWidth,
+              child: SizedBox(
+                width: containerWidth,
+                height: buttonHeigth,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: CustomPalette.brown,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
                     ),
                   ),
-                );
-              },
+                  onPressed: () async {
+                    final email = _emailController.text;
+                    final password = _passwordController.text;
+                    _signInWithPassword(email, password, widget.isRegistering);
+                  },
+                  child: Text(
+                    _isLoading
+                        ? 'Loading...'
+                        : widget.isRegistering
+                            ? 'Register'
+                            : 'Login',
+                    style: const TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                ),
+              ),
             ),
           ],
         ),

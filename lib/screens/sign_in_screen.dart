@@ -1,11 +1,10 @@
-import "package:demo/colors/custom_palette.dart";
-import "package:flutter/foundation.dart";
-import "package:flutter/material.dart";
-import "package:flutter_signin_button/flutter_signin_button.dart";
-import 'package:demo/firebase_options.dart';
+import 'dart:async';
+
+import 'package:demo/colors/custom_palette.dart';
 import 'package:demo/screens/register_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 class SignInSelectionScreen extends StatefulWidget {
   const SignInSelectionScreen({super.key});
@@ -24,29 +23,7 @@ class _SignInSelectionScreenState extends State<SignInSelectionScreen> {
 
   Future<void> signInWithFacebook() async {}
   Future<void> signInWithGoogle() async {}
-
-  Future<void> signInWithEmail(String emailAddress, String password) async {
-    try {
-      await Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform,
-      );
-      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: emailAddress.trim(), password: password);
-      if (kDebugMode) {
-        print("${credential.user!.email} signed in!");
-      }
-    } on FirebaseAuthException catch (e) {
-      if (kDebugMode) {
-        if (e.code == 'user-not-found') {
-          print('No user found for that email.');
-        } else if (e.code == 'wrong-password') {
-          print('Wrong password provided for that user.');
-        }
-      }
-    }
-  }
-
-  void navigateToSignInScreen() {
+  Future<void> navigateToSignInScreen() async {
     Navigator.push(
       context,
       MaterialPageRoute(
