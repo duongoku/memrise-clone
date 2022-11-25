@@ -8,10 +8,12 @@ import 'package:demo/screens/prefab.dart';
 import 'package:demo/screens/register_screen.dart';
 import 'package:demo/screens/sign_in_screen.dart';
 import 'package:demo/screens/user_courses_screen.dart';
-import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 const phrasesCollection = 'phrases';
 
@@ -22,15 +24,14 @@ class TestApp {
 
   static void runTests() {
     testWidgets('Initial test to ensure everything is normal', (tester) async {
-      MyApp.firestore = FakeFirebaseFirestore();
-      await MyApp.firestore.collection(phrasesCollection).add({
-        'dstLang': 'en',
-        'meaning': 'Chrome',
-        'phrase': 'クロム',
-        'srcLang': 'ja',
-        'videoUrl':
-            'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
-      });
+      await dotenv.load();
+      WidgetsFlutterBinding.ensureInitialized();
+      await Supabase.initialize(
+        url: dotenv.env['SUPABASE_URL']!,
+        anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
+      );
+      await Supabase.instance.client.auth
+          .signInWithPassword(email: "19020060@vnu.edu.vn", password: "123456");
       setTesterWindowSize(tester);
     });
 
@@ -73,18 +74,23 @@ class TestApp {
     });
 
     group('New phrase screen', () {
-      Widget testWidget = MediaQuery(
-        data: const MediaQueryData(),
+      Widget testWidget = const MediaQuery(
+        data: MediaQueryData(),
         child: MaterialApp(
           home: NewPhrase(
-            phrase: Phrase(
-              phrase: 'Hello',
-              meaning: 'Привет',
-              srcLang: 'English',
-              dstLang: 'Russian',
-              videoUrl:
-                  'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
-            ),
+            words: [
+              {
+                "id": 1,
+                "videoUrl":
+                    "https://duongoku.github.io/archive/2022/MemriseClone/videos/cava.mp4",
+                "phrase": "cava",
+                "meaning": "cava",
+                "srcLang": "fr",
+                "dstLang": "en",
+                "lesson": 1,
+              }
+            ],
+            currentWordIndex: 0,
           ),
         ),
       );
@@ -154,7 +160,6 @@ class TestApp {
         await tester.pumpWidget(testWidget);
         await tester.tap(find.byType(TextButton).first);
       });
-
     });
 
     group('Sign in selection screen', () {
@@ -186,7 +191,6 @@ class TestApp {
       });
     });
   }
-  
 }
 
 void main() {
