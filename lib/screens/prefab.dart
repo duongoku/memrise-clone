@@ -40,6 +40,7 @@ abstract class Prefab {
   static const vPadding5 = SizedBox(height: 5);
   static const vPadding10 = SizedBox(height: 10);
   static const vPadding15 = SizedBox(height: 15);
+  static const vPadding20 = SizedBox(height: 20);
   static const vPadding25 = SizedBox(height: 25);
   static const vPadding35 = SizedBox(height: 35);
   static const vPadding50 = SizedBox(height: 50);
