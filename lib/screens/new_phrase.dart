@@ -58,7 +58,7 @@ class _NewPhraseState extends State<NewPhrase> {
             margin: const EdgeInsets.only(right: 20),
             alignment: Alignment.center,
             child: const Text(
-              '0', // TODO: dynamic score
+              "0", // TODO: dynamic score
               style: TextStyle(fontSize: 20, color: CustomPalette.iconColor),
             ),
           ),

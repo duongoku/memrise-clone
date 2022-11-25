@@ -33,19 +33,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void initState() {
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
-    // TODO: onAuthStateChange not working when re-login with the same credentials
-    _authStateSubscription = supabase.auth.onAuthStateChange.listen((event) {
+    _authStateSubscription =
+        supabase.auth.onAuthStateChange.listen((AuthState event) {
       if (_redirecting) return;
 
       final session = event.session;
 
       if (session != null) {
         _redirecting = true;
-        Navigator.push(
+        Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
             builder: (context) => const LessonSelectionScreen(),
           ),
+          (route) => false,
         );
       }
     });

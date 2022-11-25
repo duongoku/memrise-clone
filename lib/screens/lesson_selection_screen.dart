@@ -64,14 +64,15 @@ class _LessonSelectionScreenState extends State<LessonSelectionScreen> {
 
   List<Widget> getLessonsFromSnapshot(AsyncSnapshot snapshot) {
     List<Widget> lessons = [];
-    int count = 0;
+    if (snapshot.connectionState != ConnectionState.done) {
+      return lessons;
+    }
     for (var lesson in snapshot.data) {
-      count++;
       lessons.add(memriseIcon);
       lessons.add(TextButton(
         onPressed: () => toWordListScreen(lesson["id"]),
         child: Text(
-          "$count - ${lesson['type']}",
+          "${lesson["order"]} - ${lesson["type"]}",
           style: const TextStyle(color: Colors.white, fontSize: 20),
         ),
       ));
@@ -119,15 +120,29 @@ class _LessonSelectionScreenState extends State<LessonSelectionScreen> {
       ),
       backgroundColor: CustomPalette.primaryColor,
       body: FutureBuilder(
-        future: supabase.from("lessons").select("*"),
+        future: supabase
+            .from("lessons")
+            .select("*")
+            .order("order", ascending: true),
         builder: (context, snapshot) {
-          return ListView(
-            padding: const EdgeInsets.only(
-              top: 20,
-              bottom: learnButtonHeight + 20,
-            ),
-            children: getLessonsFromSnapshot(snapshot),
-          );
+          var lessons = getLessonsFromSnapshot(snapshot);
+          if (lessons.isEmpty) {
+            return const Padding(
+              padding: EdgeInsets.only(
+                top: 20,
+                bottom: learnButtonHeight + 20,
+              ),
+              child: Center(child: CircularProgressIndicator()),
+            );
+          } else {
+            return ListView(
+              padding: const EdgeInsets.only(
+                top: 20,
+                bottom: learnButtonHeight + 20,
+              ),
+              children: lessons,
+            );
+          }
         },
       ),
       floatingActionButton: SizedBox(
