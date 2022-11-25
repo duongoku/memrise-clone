@@ -34,7 +34,7 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
         InkWell(
           onTap: () {
             Navigator.of(context).pushNamedAndRemoveUntil(
-                          '/LessonSelection/', ModalRoute.withName('/'));
+                '/LessonSelection/', ModalRoute.withName('/'));
           },
           child: Row(
             children: [
@@ -73,6 +73,7 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: CustomPalette.primaryColor,
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: CustomPalette.iconColor),
@@ -115,16 +116,16 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
           ),
         ],
       ),
-      backgroundColor: CustomPalette.primaryColor,
       body: FutureBuilder(
           future: supabase.from("profiles").select().eq("id", userId).execute(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (!snapshot.hasData) {
               return const Center(
-                  child: Text(
-                'Please wait, its loading...',
-                style: TextStyle(color: Colors.white),
-              ));
+                child: Text(
+                  'Please wait, its loading...',
+                  style: TextStyle(color: Colors.white),
+                ),
+              );
             } else {
               data = snapshot.data.data[0]["courses"];
               return ListView(
@@ -172,7 +173,6 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
                       'OTHER COURSES',
                       style: TextStyle(color: Colors.grey, fontSize: 18),
                     ),
-                    
                     ...getCoursesFromData(data["otherCourses"])
                   ],
                 ],
