@@ -22,7 +22,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           IconButton(
             icon: const Icon(
               Icons.settings,
-              color: CustomPalette.iconColor,
+              color: Colors.white,
             ),
             onPressed: () {
               //to do push setting screen
@@ -36,7 +36,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           )
         ],
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: CustomPalette.iconColor),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -142,7 +142,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                               width: 200,
                               height: 5,
                               child: LinearProgressIndicator(
-                                value: 0.8,
+                                value: 0.95,
                                 color: Colors.orange.shade600,
                               ),
                             ),
