@@ -48,14 +48,14 @@ class _LessonSelectionScreenState extends State<LessonSelectionScreen> {
     });
   }
 
-  Future<void> toWordListScreen(int lessonId) async {
+  Future<void> toWordListScreen(int lessonId, String lesson) async {
     supabase.from("phrases").select("*").eq("lesson", lessonId).then((rows) {
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => WordListScreen(
             words: rows,
-            lesson: "Lesson 1", //TODO: dynamic lesson
+            lesson: lesson,
           ),
         ),
       );
@@ -70,14 +70,14 @@ class _LessonSelectionScreenState extends State<LessonSelectionScreen> {
     for (var lesson in snapshot.data) {
       lessons.add(memriseIcon);
       lessons.add(TextButton(
-        onPressed: () => toWordListScreen(lesson["id"]),
+        onPressed: () => toWordListScreen(lesson["id"], lesson["name"]),
         child: Text(
           "${lesson["order"]} - ${lesson["type"]}",
           style: const TextStyle(color: Colors.white, fontSize: 20),
         ),
       ));
       lessons.add(TextButton(
-        onPressed: () => toWordListScreen(lesson["id"]),
+        onPressed: () => toWordListScreen(lesson["id"], lesson["name"]),
         child: Text(
           lesson["name"],
           style: const TextStyle(
