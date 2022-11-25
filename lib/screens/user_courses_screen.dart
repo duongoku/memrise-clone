@@ -1,10 +1,14 @@
+import 'dart:developer';
+
 import 'package:demo/colors/custom_palette.dart';
 import 'package:demo/constants.dart';
 import 'package:demo/main.dart';
 import 'package:demo/screens/language_selection_screen.dart';
 import 'package:demo/screens/lesson_selection_screen.dart';
+import 'package:demo/screens/prefab.dart';
 
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class UserCoursesScreen extends StatefulWidget {
   const UserCoursesScreen({super.key});
@@ -15,6 +19,56 @@ class UserCoursesScreen extends StatefulWidget {
 
 class _UserCoursesScreenState extends State<UserCoursesScreen> {
   double iconSize = 50;
+  var userId =
+      supabase.auth.currentUser?.id ?? "7b0dc386-e979-49d3-950d-13af79f3389d";
+  var data;
+
+  List<Widget> getCoursesFromData(data) {
+    List<Widget> courses = [];
+    Type type = data.runtimeType;
+    print(type);
+    for (String course in data) {
+      print(course);
+      courses.add(Prefab.vPadding20);
+      courses.add(
+        InkWell(
+          onTap: () {
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                          '/LessonSelection/', ModalRoute.withName('/'));
+          },
+          child: Row(
+            children: [
+              ClipOval(
+                child: SizedBox.fromSize(
+                  size: const Size.fromRadius(30), // Image radius
+                  child: Image.asset(
+                    "assets/images/${course}_course_icon.jpg",
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Text(
+                course,
+                style: const TextStyle(color: Colors.grey, fontSize: 20),
+              ),
+            ],
+          ),
+        ),
+      );
+      courses.add(Prefab.vPadding10);
+      courses.add(const Divider(
+        thickness: 1,
+        color: Colors.blueGrey,
+      ));
+    }
+    if (courses.isNotEmpty) {
+      courses.removeLast();
+    }
+    return courses;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,15 +117,16 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
       ),
       backgroundColor: CustomPalette.primaryColor,
       body: FutureBuilder(
-          future: supabase.from('profiles').select('*').execute(),
+          future: supabase.from("profiles").select().eq("id", userId).execute(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
+            if (!snapshot.hasData) {
               return const Center(
                   child: Text(
-                'Please wait its loading...',
+                'Please wait, its loading...',
                 style: TextStyle(color: Colors.white),
               ));
             } else {
+              data = snapshot.data.data[0]["courses"];
               return ListView(
                 padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
                 children: [
@@ -84,12 +139,8 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                const LessonSelectionScreen()),
-                      );
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          '/LessonSelection/', ModalRoute.withName('/'));
                     },
                     child: Row(
                       children: [
@@ -97,7 +148,7 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
                           child: SizedBox.fromSize(
                             size: const Size.fromRadius(30), // Image radius
                             child: Image.asset(
-                              "assets/images/${snapshot.data["currentCourse"]}_course_icon.jpg",
+                              "assets/images/${data["currentCourse"]}_course_icon.jpg",
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -106,7 +157,7 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
                           width: 10,
                         ),
                         Text(
-                          '${snapshot.data["currentCourse"]}',
+                          '${data["currentCourse"]}',
                           style:
                               const TextStyle(color: Colors.grey, fontSize: 20),
                         ),
@@ -116,56 +167,13 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
                   const SizedBox(
                     height: 40,
                   ),
-                  if (snapshot.data["otherCourses"].length != 0) ...[
+                  if (data["otherCourses"].length != 0) ...[
                     const Text(
                       'OTHER COURSES',
                       style: TextStyle(color: Colors.grey, fontSize: 18),
                     ),
-                    for (var i in snapshot.data["otherCourses"]) ...[
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const LessonSelectionScreen()), //todo
-                          );
-                        },
-                        child: Row(
-                          children: [
-                            ClipOval(
-                              child: SizedBox.fromSize(
-                                size: const Size.fromRadius(30), // Image radius
-                                child: Image.asset(
-                                  "assets/images/${i}_course_icon.jpg",
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              '$i',
-                              style: const TextStyle(
-                                  color: Colors.grey, fontSize: 20),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      if (i != snapshot.data["otherCourses"].last) ...[
-                        const Divider(
-                          thickness: 1,
-                          color: Colors.blueGrey,
-                        ),
-                      ]
-                    ]
+                    
+                    ...getCoursesFromData(data["otherCourses"])
                   ],
                 ],
               );
