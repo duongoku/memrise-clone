@@ -14,7 +14,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: appTitle,
-      home: const GettingStarted(),
+      home: Supabase.instance.client.auth.currentUser != null
+          ? const UserCoursesScreen()
+          : const GettingStarted(),
       routes: {
         '/GettingStarted/': (context) => const GettingStarted(),
         '/LanguageSelection/': (context) => const LanguageSelectionScreen(),
