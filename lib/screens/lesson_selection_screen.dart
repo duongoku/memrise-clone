@@ -2,6 +2,7 @@ import 'package:demo/colors/custom_palette.dart';
 import 'package:demo/constants.dart';
 import 'package:demo/screens/new_phrase.dart';
 import 'package:demo/screens/user_courses_screen.dart';
+import 'package:demo/screens/user_profile_screen.dart';
 import 'package:demo/screens/word_list_screen.dart';
 
 import 'package:flutter/material.dart';
@@ -99,8 +100,7 @@ class _LessonSelectionScreenState extends State<LessonSelectionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: <Widget>[
-          IconButton(
+        leading: IconButton(
             icon: const Icon(
               Icons.menu,
               color: Colors.white,
@@ -110,6 +110,22 @@ class _LessonSelectionScreenState extends State<LessonSelectionScreen> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => const UserCoursesScreen(),
+                ),
+              );
+            },
+          ),
+        actions: <Widget>[
+          
+          IconButton(
+            icon: const Icon(
+              Icons.person,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const UserProfileScreen(),
                 ),
               );
             },
