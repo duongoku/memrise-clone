@@ -1,13 +1,5 @@
-import 'package:demo/main.dart';
-import 'package:demo/screens/getting_started_screen.dart';
-import 'package:demo/screens/language_selection_screen.dart';
-import 'package:demo/screens/learn_screen.dart';
-import 'package:demo/screens/lesson_selection_screen.dart';
-import 'package:demo/screens/new_phrase.dart';
-import 'package:demo/screens/prefab.dart';
-import 'package:demo/screens/register_screen.dart';
-import 'package:demo/screens/sign_in_screen.dart';
-import 'package:demo/screens/user_courses_screen.dart';
+import 'package:demo/screens/all_screens.dart';
+import 'package:demo/constants.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -23,15 +15,17 @@ class TestApp {
   }
 
   static void runTests() {
-    testWidgets('Initial test to ensure everything is normal', (tester) async {
+    testWidgets('Initial test to setup', (tester) async {
       await dotenv.load();
       WidgetsFlutterBinding.ensureInitialized();
       await Supabase.initialize(
         url: dotenv.env['SUPABASE_URL']!,
         anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
       );
-      await Supabase.instance.client.auth
-          .signInWithPassword(email: "19020060@vnu.edu.vn", password: "123456");
+      await supabase.auth.signInWithPassword(
+        email: dotenv.env['TEST_EMAIL']!,
+        password: dotenv.env['TEST_PASSWORD']!,
+      );
       setTesterWindowSize(tester);
     });
 
@@ -43,6 +37,7 @@ class TestApp {
 
       testWidgets('Test get started button', (tester) async {
         await tester.pumpWidget(testWidget);
+        await tester.pumpAndSettle();
         Finder result = find.text('Get started');
         expect(result, findsOneWidget);
         await tester.tap(find.text('Get started'));
@@ -50,6 +45,7 @@ class TestApp {
 
       testWidgets('Test to login button', (tester) async {
         await tester.pumpWidget(testWidget);
+        await tester.pumpAndSettle();
         Finder result = find.text('I have an account');
         expect(result, findsOneWidget);
         await tester.tap(result);
@@ -64,11 +60,13 @@ class TestApp {
 
       testWidgets('Language selection #1', (tester) async {
         await tester.pumpWidget(testWidget);
+        await tester.pumpAndSettle();
         await tester.tap(find.byType(TextButton).first);
       });
 
       testWidgets('Language selection #2', (tester) async {
         await tester.pumpWidget(testWidget);
+        await tester.pumpAndSettle();
         await tester.tap(find.byType(DropdownButtonHideUnderline).first);
       });
     });
@@ -100,11 +98,13 @@ class TestApp {
 
       testWidgets('Test reply button', (tester) async {
         await tester.pumpWidget(testWidget);
+        await tester.pumpAndSettle();
         await tester.tap(find.byType(ElevatedButton).first);
       });
 
       testWidgets('Test OK button', (tester) async {
         await tester.pumpWidget(testWidget);
+        await tester.pumpAndSettle();
         await tester.tap(find.byType(CustomElevatedButton).last);
       });
     });
@@ -117,11 +117,13 @@ class TestApp {
 
       testWidgets('Test to user course button', (tester) async {
         await tester.pumpWidget(testWidget);
+        await tester.pumpAndSettle();
         await tester.tap(find.byType(IconButton).first);
       });
 
       testWidgets('Test to learn screen buttons', (tester) async {
         await tester.pumpWidget(testWidget);
+        await tester.pumpAndSettle();
         await tester.tap(find.byType(TextButton).first);
       });
     });
@@ -134,15 +136,18 @@ class TestApp {
 
       testWidgets('Test back button', (tester) async {
         await tester.pumpWidget(testWidget);
+        await tester.pumpAndSettle();
         await tester.tap(find.byType(IconButton).first);
       });
       testWidgets('Test learn a new course button', (tester) async {
         await tester.pumpWidget(testWidget);
+        await tester.pumpAndSettle();
         await tester.tap(find.byType(ElevatedButton).first);
       });
 
       testWidgets('Test courses', (tester) async {
         await tester.pumpWidget(testWidget);
+        await tester.pumpAndSettle();
         await tester.tap(find.byType(InkWell).first);
       });
     });
@@ -158,6 +163,7 @@ class TestApp {
 
       testWidgets('Test redirect button', (tester) async {
         await tester.pumpWidget(testWidget);
+        await tester.pumpAndSettle();
         await tester.tap(find.byType(TextButton).first);
       });
     });
@@ -170,6 +176,7 @@ class TestApp {
 
       testWidgets('Test signin buttons', (tester) async {
         await tester.pumpWidget(testWidget);
+        await tester.pumpAndSettle();
         await tester.tap(find.byType(SignInButton).first);
       });
     });
@@ -182,11 +189,13 @@ class TestApp {
 
       testWidgets('Test back button', (tester) async {
         await tester.pumpWidget(testWidget);
+        await tester.pumpAndSettle();
         await tester.tap(find.byType(IconButton).first);
       });
 
       testWidgets('Test OK button', (tester) async {
         await tester.pumpWidget(testWidget);
+        await tester.pumpAndSettle();
         await tester.tap(find.byType(CustomElevatedButton).first);
       });
     });
