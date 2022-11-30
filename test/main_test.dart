@@ -191,6 +191,16 @@ class TestApp {
         await tester.pumpWidget(testWidget);
         await tester.pumpAndSettle();
         await tester.tap(find.byType(TextButton).first);
+        await tester.pumpAndSettle();
+      });
+
+      testWidgets('Test register button', (tester) async {
+        await tester.pumpWidget(testWidget);
+        await tester.pumpAndSettle();
+        var result = find.text('Register');
+        expect(result, findsOneWidget);
+        await tester.tap(result);
+        await tester.pumpAndSettle();
       });
     });
 
