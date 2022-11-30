@@ -38,11 +38,11 @@ class _LessonSelectionScreenState extends State<LessonSelectionScreen> {
   );
 
   Future<void> toLearnScreen() async {
-    //TODO: Change route to learnscreen
     supabase.from("phrases").select("*").then((rows) {
       Navigator.push(
         context,
         MaterialPageRoute(
+          //TODO: Change route to learnscreen
           builder: (context) => NewPhrase(words: rows, currentWordIndex: 0),
         ),
       );
@@ -115,7 +115,6 @@ class _LessonSelectionScreenState extends State<LessonSelectionScreen> {
             },
           ),
         actions: <Widget>[
-          
           IconButton(
             icon: const Icon(
               Icons.person,
@@ -165,7 +164,7 @@ class _LessonSelectionScreenState extends State<LessonSelectionScreen> {
         width: learnButtonWidth,
         height: learnButtonHeight,
         child: FloatingActionButton.extended(
-          onPressed: toLearnScreen,
+          onPressed: () => toLearnScreen(),
           label: const Text(
             "Learn",
             style: TextStyle(
