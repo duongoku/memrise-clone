@@ -40,7 +40,8 @@ class TestApp {
         await tester.pumpAndSettle();
         Finder result = find.text('Get started');
         expect(result, findsOneWidget);
-        await tester.tap(find.text('Get started'));
+        await tester.tap(result);
+        await tester.pumpAndSettle();
       });
 
       testWidgets('Test to login button', (tester) async {
@@ -49,6 +50,7 @@ class TestApp {
         Finder result = find.text('I have an account');
         expect(result, findsOneWidget);
         await tester.tap(result);
+        await tester.pumpAndSettle();
       });
     });
 
@@ -62,12 +64,14 @@ class TestApp {
         await tester.pumpWidget(testWidget);
         await tester.pumpAndSettle();
         await tester.tap(find.byType(TextButton).first);
+        await tester.pumpAndSettle();
       });
 
       testWidgets('Language selection #2', (tester) async {
         await tester.pumpWidget(testWidget);
         await tester.pumpAndSettle();
         await tester.tap(find.byType(DropdownButtonHideUnderline).first);
+        await tester.pumpAndSettle();
       });
     });
 
@@ -93,19 +97,18 @@ class TestApp {
         ),
       );
 
-      // Wait for video to load, but it doesn't work lmao
-      // sleep(const Duration(seconds: 2));
-
-      testWidgets('Test reply button', (tester) async {
+      testWidgets('Test replay button', (tester) async {
         await tester.pumpWidget(testWidget);
         await tester.pumpAndSettle();
         await tester.tap(find.byType(ElevatedButton).first);
+        await tester.pumpAndSettle();
       });
 
       testWidgets('Test OK button', (tester) async {
         await tester.pumpWidget(testWidget);
         await tester.pumpAndSettle();
         await tester.tap(find.byType(CustomElevatedButton).last);
+        await tester.pumpAndSettle();
       });
     });
 
@@ -119,12 +122,35 @@ class TestApp {
         await tester.pumpWidget(testWidget);
         await tester.pumpAndSettle();
         await tester.tap(find.byType(IconButton).first);
+        await tester.pumpAndSettle();
+      });
+
+      testWidgets('Test to user profile button', (tester) async {
+        await tester.pumpWidget(testWidget);
+        await tester.pumpAndSettle();
+        await tester.tap(find.byType(IconButton).last);
+        await tester.pumpAndSettle();
+      });
+
+      testWidgets('Test to new phrase buttons #1', (tester) async {
+        await tester.pumpWidget(testWidget);
+        await tester.pumpAndSettle();
+        await tester.tap(find.byType(TextButton).first);
+        await tester.pumpAndSettle();
+      });
+
+      testWidgets('Test to new phrase buttons #2', (tester) async {
+        await tester.pumpWidget(testWidget);
+        await tester.pumpAndSettle();
+        await tester.tap(find.byType(TextButton).last);
+        await tester.pumpAndSettle();
       });
 
       testWidgets('Test to learn screen buttons', (tester) async {
         await tester.pumpWidget(testWidget);
         await tester.pumpAndSettle();
-        await tester.tap(find.byType(TextButton).first);
+        await tester.tap(find.byType(FloatingActionButton).first);
+        await tester.pumpAndSettle();
       });
     });
 
