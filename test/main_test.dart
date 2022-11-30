@@ -132,14 +132,14 @@ class TestApp {
         await tester.pumpAndSettle();
       });
 
-      testWidgets('Test to new phrase buttons #1', (tester) async {
+      testWidgets('Test to new phrase button #1', (tester) async {
         await tester.pumpWidget(testWidget);
         await tester.pumpAndSettle();
         await tester.tap(find.byType(TextButton).first);
         await tester.pumpAndSettle();
       });
 
-      testWidgets('Test to new phrase buttons #2', (tester) async {
+      testWidgets('Test to new phrase button #2', (tester) async {
         await tester.pumpWidget(testWidget);
         await tester.pumpAndSettle();
         await tester.tap(find.byType(TextButton).last);
@@ -223,6 +223,33 @@ class TestApp {
         await tester.pumpWidget(testWidget);
         await tester.pumpAndSettle();
         await tester.tap(find.byType(CustomElevatedButton).first);
+      });
+    });
+
+    group('Word list screen', () {
+      Widget testWidget = const MediaQuery(
+        data: MediaQueryData(),
+        child: MaterialApp(
+          home: WordListScreen(words: [
+            {
+              "id": 1,
+              "videoUrl":
+                  "https://duongoku.github.io/archive/2022/MemriseClone/videos/cava.mp4",
+              "phrase": "cava",
+              "meaning": "cava",
+              "srcLang": "fr",
+              "dstLang": "en",
+              "lesson": 1,
+            }
+          ], lesson: "Mock lesson"),
+        ),
+      );
+
+      testWidgets('Test word card', (tester) async {
+        await tester.pumpWidget(testWidget);
+        await tester.pumpAndSettle();
+        await tester.tap(find.byType(Card).first);
+        await tester.pumpAndSettle();
       });
     });
   }

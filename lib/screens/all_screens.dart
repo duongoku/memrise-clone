@@ -7,3 +7,4 @@ export 'package:demo/screens/prefab.dart';
 export 'package:demo/screens/register_screen.dart';
 export 'package:demo/screens/sign_in_screen.dart';
 export 'package:demo/screens/user_courses_screen.dart';
+export 'package:demo/screens/word_list_screen.dart';
