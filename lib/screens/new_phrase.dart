@@ -24,14 +24,17 @@ class _NewPhraseState extends State<NewPhrase> {
       TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24);
   static const srcStyle = TextStyle(color: Colors.grey, fontSize: 12);
 
-  late VideoPlayerController videoController;
+  late List<VideoPlayerController> videoControllers = [];
+
+  late PageController pageController;
 
   dynamic currentWord;
 
   void replayVideo() {
     setState(() {
-      videoController.seekTo(const Duration(seconds: 0));
-      videoController.play();
+      videoControllers[widget.words.indexOf(currentWord)]
+          .seekTo(const Duration(seconds: 0));
+      videoControllers[widget.words.indexOf(currentWord)].play();
     });
   }
 
@@ -39,86 +42,91 @@ class _NewPhraseState extends State<NewPhrase> {
   void initState() {
     super.initState();
     currentWord = widget.words[widget.currentWordIndex];
-    videoController = VideoPlayerController.network(currentWord["videoUrl"])
-      ..initialize().then((_) {
+    pageController = PageController(
+      initialPage: widget.currentWordIndex,
+    );
+    for (int i = 0; i < widget.words.length; i++) {
+      VideoPlayerController v = VideoPlayerController.network(
+        widget.words[i]["videoUrl"],
+      );
+      v.initialize().then((_) {
         setState(() {
-          videoController.play();
+          if (i == widget.currentWordIndex) {
+            v.play();
+          }
         });
       });
+      videoControllers.add(v);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> pages = [];
+    for (int i = 0; i < videoControllers.length; i++) {
+      pages.add(
+        ListView(
+          children: [
+            Prefab.vPadding10,
+            videoControllers[i].value.isInitialized
+                ? AspectRatio(
+                    aspectRatio: videoControllers[i].value.aspectRatio,
+                    child: VideoPlayer(videoControllers[i]),
+                  )
+                : Container(),
+            ElevatedButton(
+              onPressed: replayVideo,
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                    CustomPalette.lighterPrimaryColor),
+              ),
+              child: const Icon(Icons.replay),
+            ),
+            Prefab.vPadding35,
+            Text(
+              widget.words[i]["srcLang"],
+              style: srcStyle,
+              textAlign: TextAlign.center,
+            ),
+            Prefab.vPadding15,
+            Text(
+              widget.words[i]["phrase"],
+              style: phraseStyle,
+              textAlign: TextAlign.center,
+            ),
+            Prefab.vPadding35,
+            Text(
+              widget.words[i]["dstLang"],
+              style: srcStyle,
+              textAlign: TextAlign.center,
+            ),
+            Prefab.vPadding15,
+            Text(
+              widget.words[i]["meaning"],
+              style: meaningStyle,
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: CustomPalette.lighterPrimaryColor,
-        foregroundColor: CustomPalette.lightGreen,
-        actions: [
-          Container(
-            margin: const EdgeInsets.only(right: 20),
-            alignment: Alignment.center,
-            child: const Text(
-              "0", // TODO: dynamic score
-              style: TextStyle(fontSize: 20, color: CustomPalette.iconColor),
-            ),
-          ),
-        ],
+        title: Text(
+            "${widget.words.indexOf(currentWord) + 1}/${widget.words.length}"),
       ),
       backgroundColor: CustomPalette.primaryColor,
-      body: ListView(
-        children: [
-          Prefab.vPadding10,
-          videoController.value.isInitialized
-              ? AspectRatio(
-                  aspectRatio: videoController.value.aspectRatio,
-                  child: VideoPlayer(videoController),
-                )
-              : Container(),
-          ElevatedButton(
-            onPressed: replayVideo,
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(
-                  CustomPalette.lighterPrimaryColor),
-            ),
-            child: const Icon(Icons.replay),
-          ),
-          Prefab.vPadding35,
-          Text(
-            currentWord["srcLang"],
-            style: srcStyle,
-            textAlign: TextAlign.center,
-          ),
-          Prefab.vPadding15,
-          Text(
-            currentWord["phrase"],
-            style: phraseStyle,
-            textAlign: TextAlign.center,
-          ),
-          Prefab.vPadding35,
-          Text(
-            currentWord["dstLang"],
-            style: srcStyle,
-            textAlign: TextAlign.center,
-          ),
-          Prefab.vPadding15,
-          Text(
-            currentWord["meaning"],
-            style: meaningStyle,
-            textAlign: TextAlign.center,
-          ),
-          Prefab.vPadding150,
-          Center(
-            child: SizedBox(
-              height: 50,
-              width: 350,
-              child: CustomElevatedButton(
-                onPressed: () {}, // TODO: implement
-                text: Prefab.okButtonText,
-                style: Prefab.okButtonStyle,
-              ),
-            ),
-          ),
-        ],
+      body: PageView(
+        controller: pageController,
+        children: pages,
+        onPageChanged: (index) {
+          setState(() {
+            currentWord = widget.words[index];
+            replayVideo();
+          });
+        },
       ),
     );
   }
@@ -126,6 +134,8 @@ class _NewPhraseState extends State<NewPhrase> {
   @override
   void dispose() {
     super.dispose();
-    videoController.dispose();
+    for (var element in videoControllers) {
+      element.dispose();
+    }
   }
 }
