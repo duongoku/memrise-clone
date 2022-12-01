@@ -73,7 +73,7 @@ class _WordListScreenState extends State<WordListScreen> {
             Card(
               color: CustomPalette.primaryColor,
               child: ListTile(
-                leading: const FlutterLogo(size: 56.0), //TODO: add image
+                leading: Image.asset("assets/images/new_phrase.png"),
                 onTap: () {
                   toNewPhraseScreen(widget.words, i);
                 },
