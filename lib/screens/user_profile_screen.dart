@@ -14,6 +14,64 @@ class UserProfileScreen extends StatefulWidget {
 }
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
+  var userId =
+      supabase.auth.currentUser?.id ?? "fc6a2f71-9895-4d42-8f3f-682fe79680c9";
+
+  List<Widget> getLeaderBoard(data) {
+    List<Widget> users = [];
+    int index = 0;
+    for (Map user in data) {
+      index++;
+      
+      Color bgColor = (userId == user["id"]) ? Colors.blueGrey.shade400 : Colors.blueGrey.shade700;
+      users.add(Container(
+        color: bgColor,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(30, 15, 15, 15),
+          child: SizedBox(
+            height: 40,
+            child: Row(
+              children: [
+                Text(
+                  "$index.",
+                  style: const TextStyle(color: Colors.white, fontSize: 15),
+                ),
+                Prefab.hPadding15,
+                ClipOval(
+                  child: SizedBox.fromSize(
+                    size: const Size.fromRadius(22), // Image radius
+                    child: Image.asset(
+                      "images/${user["avatar_url"]}",
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                Prefab.hPadding15,
+                Text(
+                  "${user["username"]}",
+                  style: const TextStyle(color: Colors.white, fontSize: 15),
+                ),
+                const Spacer(),
+                Text(
+                  "${user["experience_point"]}",
+                  style: const TextStyle(color: Colors.white, fontSize: 15),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ));
+    }
+
+    return users;
+  }
+
+  getCurrentUser(users) {
+    for (Map user in users) {
+      if (user["id"] == userId) return user;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,17 +79,13 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
         actions: <Widget>[
           IconButton(
             icon: const Icon(
-              Icons.settings,
+              Icons.exit_to_app,
               color: Colors.white,
             ),
             onPressed: () {
-              //to do push setting screen
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => const UserCoursesScreen(),
-              //   ),
-              // );
+              supabase.auth.signOut();
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  '/GettingStarted/', ModalRoute.withName('/'));
             },
           )
         ],
@@ -47,181 +101,158 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       ),
       backgroundColor: CustomPalette.primaryColor,
       body: FutureBuilder(
-          //future: supabase.from('profiles').select('*').execute(),
+          future: supabase
+              .from("profiles")
+              .select()
+              .order("experience_point", ascending: false)
+              .execute(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-        // if (snapshot.connectionState == ConnectionState.waiting) {
-        //   return const Center(
-        //       child: Text(
-        //     'Please wait its loading...',
-        //     style: TextStyle(color: Colors.white),
-        //   ));
-        // } else {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              color: CustomPalette.lighterPrimaryColor,
-              child: Padding(
-                padding: const EdgeInsets.all(15),
-                child: Column(
-                  children: [
-                    Row(children: [
-                      ClipOval(
-                        child: SizedBox.fromSize(
-                          size: const Size.fromRadius(50), // Image radius
-                          child: Image.asset(
-                            "assets/images/background.jpg",
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      Prefab.hPadding20,
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Your username",
-                              style: TextStyle(
-                                  color: Colors.grey.shade500, fontSize: 14)),
-                          Prefab.vPadding5,
-                          const Text("Username",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 14)),
-                          Prefab.vPadding5,
-                          Text("Words learned",
-                              style: TextStyle(
-                                  color: Colors.grey.shade500, fontSize: 14)),
-                          Prefab.vPadding5,
-                          const Text("3",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 14)),
-                        ],
-                      ),
-                      Prefab.hPadding30,
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Experience Points",
-                              style: TextStyle(
-                                  color: Colors.grey.shade500, fontSize: 14)),
-                          Prefab.vPadding5,
-                          const Text("1957",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 14)),
-                          Prefab.vPadding5,
-                          Text("Longest streak",
-                              style: TextStyle(
-                                  color: Colors.grey.shade500, fontSize: 14)),
-                          Prefab.vPadding5,
-                          const Text("0",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 14)),
-                        ],
-                      ),
-                    ]),
-                    Prefab.vPadding25,
-                    Row(
-                      children: [
-                        Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            Image.asset(
-                              "assets/images/shield.jpg",
-                              height: 90,
-                              width: 100,
-                            ),
-                            const Text("3",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 40))
-                          ],
-                        ),
-                        Prefab.hPadding35,
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              width: 200,
-                              height: 5,
-                              child: LinearProgressIndicator(
-                                value: 0.95,
-                                color: Colors.orange.shade600,
-                              ),
-                            ),
-                            Prefab.vPadding10,
-                            const Text("+43 point to rank 4",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 13))
-                          ],
-                        )
-                      ],
-                    )
-                  ],
+            if (!snapshot.hasData) {
+              return const Center(
+                child: Text(
+                  'Please wait, its loading...',
+                  style: TextStyle(color: Colors.white),
                 ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
-              child: Row(
-                children: const [
-                  Text(
-                    "Leaderboard this week               ",
-                    style: TextStyle(color: Colors.white, fontSize: 15),
-                  ),
-                  Spacer(),
-                  Icon(Icons.more_vert, color: Colors.white)
-                ],
-              ),
-            ),
-            Expanded(
-              child: ListView(
+              );
+            } else {
+              var users = snapshot.data.data;
+              var currentUser = getCurrentUser(users);
+              num level = currentUser["experience_point"] ~/ 500;
+              double levelProgress =
+                  currentUser["experience_point"] % 500 / 500;
+              num expNeeded = 500 - currentUser["experience_point"] % 500;
+
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    color: Colors.blueGrey.shade700,
+                    color: CustomPalette.lighterPrimaryColor,
                     child: Padding(
-                      padding: const EdgeInsets.fromLTRB(30, 15, 15, 15),
-                      child: SizedBox(
-                        height: 40,
-                        child: Row(
-                          children: [
-                            const Text(
-                              "1.",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 15),
-                            ),
-                            Prefab.hPadding15,
+                      padding: const EdgeInsets.all(15),
+                      child: Column(
+                        children: [
+                          Row(children: [
                             ClipOval(
                               child: SizedBox.fromSize(
-                                size: const Size.fromRadius(22), // Image radius
+                                size: const Size.fromRadius(50), // Image radius
                                 child: Image.asset(
-                                  "assets/images/background.jpg",
+                                  "images/${currentUser["avatar_url"]}",
                                   fit: BoxFit.cover,
                                 ),
                               ),
                             ),
-                            Prefab.hPadding15,
-                            const Text(
-                              "Username",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 15),
+                            Prefab.hPadding20,
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Your username",
+                                    style: TextStyle(
+                                        color: Colors.grey.shade500,
+                                        fontSize: 14)),
+                                Prefab.vPadding5,
+                                Text("${currentUser["username"]}",
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 14)),
+                                Prefab.vPadding5,
+                                Text("Words learned",
+                                    style: TextStyle(
+                                        color: Colors.grey.shade500,
+                                        fontSize: 14)),
+                                Prefab.vPadding5,
+                                Text("${currentUser["word_learned"]}",
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 14)),
+                              ],
                             ),
-                            const Spacer(),
-                            const Text(
-                              "1957",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 15),
+                            Prefab.hPadding30,
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Experience Points",
+                                    style: TextStyle(
+                                        color: Colors.grey.shade500,
+                                        fontSize: 14)),
+                                Prefab.vPadding5,
+                                Text("${currentUser["experience_point"]}",
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 14)),
+                                Prefab.vPadding5,
+                                Text("Longest streak",
+                                    style: TextStyle(
+                                        color: Colors.grey.shade500,
+                                        fontSize: 14)),
+                                Prefab.vPadding5,
+                                Text("${currentUser["longest_streak"]}",
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 14)),
+                              ],
                             ),
-                          ],
-                        ),
+                          ]),
+                          Prefab.vPadding25,
+                          Row(
+                            children: [
+                              Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  Image.asset(
+                                    "assets/images/shield.jpg",
+                                    height: 90,
+                                    width: 100,
+                                  ),
+                                  Text("$level",
+                                      style: const TextStyle(
+                                          color: Colors.white, fontSize: 40))
+                                ],
+                              ),
+                              Prefab.hPadding35,
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    width: 200,
+                                    height: 5,
+                                    child: LinearProgressIndicator(
+                                      value: levelProgress,
+                                      color: Colors.orange.shade600,
+                                    ),
+                                  ),
+                                  Prefab.vPadding10,
+                                  Text("+$expNeeded point to rank 4",
+                                      style: const TextStyle(
+                                          color: Colors.white, fontSize: 13))
+                                ],
+                              )
+                            ],
+                          )
+                        ],
                       ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
+                    child: Row(
+                      children: const [
+                        Text(
+                          "Leaderboard",
+                          style: TextStyle(color: Colors.white, fontSize: 15),
+                        ),
+                        Spacer(),
+                        // to do maybe? types of leaderboard
+                        //Icon(Icons.more_vert, color: Colors.white)
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: ListView(
+                      children: [
+                        ...getLeaderBoard(users)
+                      ],
                     ),
                   )
                 ],
-              ),
-            )
-          ],
-        );
-      }
-          //}
-          ),
+              );
+            }
+          }),
     );
   }
 }

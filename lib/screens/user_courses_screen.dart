@@ -25,10 +25,8 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
 
   List<Widget> getCoursesFromData(data) {
     List<Widget> courses = [];
-    Type type = data.runtimeType;
-    print(type);
+
     for (String course in data) {
-      print(course);
       courses.add(Prefab.vPadding20);
       courses.add(
         InkWell(
@@ -81,7 +79,6 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
             Navigator.pop(context);
           },
         ),
-        
         backgroundColor: CustomPalette.lighterPrimaryColor,
         title: const Text("Courses"),
       ),
