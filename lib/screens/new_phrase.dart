@@ -18,11 +18,20 @@ class NewPhrase extends StatefulWidget {
 }
 
 class _NewPhraseState extends State<NewPhrase> {
-  static const phraseStyle =
-      TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24);
-  static const meaningStyle =
-      TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24);
-  static const srcStyle = TextStyle(color: Colors.grey, fontSize: 12);
+  static const phraseStyle = TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    fontSize: 24,
+  );
+  static const meaningStyle = TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    fontSize: 24,
+  );
+  static const srcStyle = TextStyle(
+    color: Colors.grey,
+    fontSize: 12,
+  );
 
   late List<VideoPlayerController> videoControllers = [];
 
@@ -73,7 +82,7 @@ class _NewPhraseState extends State<NewPhrase> {
                     aspectRatio: videoControllers[i].value.aspectRatio,
                     child: VideoPlayer(videoControllers[i]),
                   )
-                : Container(),
+                : const Center(child: CircularProgressIndicator()),
             ElevatedButton(
               onPressed: replayVideo,
               style: ButtonStyle(
