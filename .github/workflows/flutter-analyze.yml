@@ -17,6 +17,7 @@ jobs:
           envkey_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
           envkey_TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
           envkey_TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+          fail_on_empty: false
         
       - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2
