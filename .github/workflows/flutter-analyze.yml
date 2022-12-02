@@ -16,6 +16,13 @@ jobs:
         with:
           flutter-version: '3.0.5'
           channel: 'master'
-      - name: Analyze source code
+
+      - name: Install dependencies
+        run: flutter pub get
+        
+      - name: Analyze source code with flutter analyzer
         run: flutter analyze
+
+      - name: Analyze source code with dart_code_metrics
+        run: flutter pub run dart_code_metrics:metrics --reporter=github lib
       
