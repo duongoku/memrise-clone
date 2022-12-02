@@ -109,12 +109,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               .order("experience_point", ascending: false),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.connectionState != ConnectionState.done) {
-              return const Center(
-                child: Text(
-                  'Please wait, its loading...',
-                  style: TextStyle(color: Colors.white),
-                ),
-              );
+              return const Center(child: CircularProgressIndicator());
             } else {
               var users = snapshot.data;
               var currentUser = getCurrentUser(users);

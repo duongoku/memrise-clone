@@ -117,14 +117,17 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
           future: supabase.from("profiles").select().eq("id", userId),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.connectionState != ConnectionState.done) {
-              return const Center(
-                child: Text(
-                  'Please wait, its loading...',
-                  style: TextStyle(color: Colors.white),
-                ),
-              );
+              return const Center(child: CircularProgressIndicator());
             } else {
               data = snapshot.data[0]["courses"];
+              if (data == null) {
+                return const Center(
+                  child: Text(
+                    "You have not enrolled in any courses yet",
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                );
+              }
               return ListView(
                 padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
                 children: [
