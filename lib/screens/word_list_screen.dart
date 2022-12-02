@@ -1,5 +1,6 @@
 import 'package:demo/colors/custom_palette.dart';
 import 'package:demo/constants.dart';
+import 'package:demo/screens/learn_screen.dart';
 import 'package:demo/screens/new_phrase.dart';
 
 import 'package:flutter/material.dart';
@@ -19,12 +20,12 @@ class _WordListScreenState extends State<WordListScreen> {
   static const learnButtonWidth = 165.0;
 
   Future<void> toLearnScreen() async {
-    //TODO: Change route to learnscreen
+    // TODO: Select from phrases where lesson = lessonId
     supabase.from("phrases").select("*").then((rows) {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => NewPhrase(words: rows, currentWordIndex: 0),
+          builder: (context) => LearnScreen(words: rows),
         ),
       );
     });
@@ -73,7 +74,7 @@ class _WordListScreenState extends State<WordListScreen> {
             Card(
               color: CustomPalette.primaryColor,
               child: ListTile(
-                leading: const FlutterLogo(size: 56.0), //TODO: add image
+                leading: Image.asset("assets/images/new_phrase.png"),
                 onTap: () {
                   toNewPhraseScreen(widget.words, i);
                 },

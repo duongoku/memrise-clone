@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
         '/GettingStarted/': (context) => const GettingStarted(),
         '/LanguageSelection/': (context) => const LanguageSelectionScreen(),
         '/LessonSelection/': (context) => const LessonSelectionScreen(),
-        '/LearnScreen/': (context) => const LearnScreen(),
         '/RegisterScreen/': (context) => const RegisterScreen(
               isRegistering: true,
             ),
