@@ -1,8 +1,8 @@
+import 'package:demo/colors/custom_palette.dart';
+import 'package:demo/constants.dart';
 import 'package:demo/screens/prefab.dart';
-import 'package:flutter/material.dart';
 
-import '../colors/custom_palette.dart';
-import '../constants.dart';
+import 'package:flutter/material.dart';
 
 class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({super.key});
