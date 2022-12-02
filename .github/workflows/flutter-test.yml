@@ -33,6 +33,7 @@ jobs:
           echo "SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}\n" >> .env
           echo "TEST_EMAIL: ${{ secrets.TEST_EMAIL }}\n" >> .env
           echo "TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}\n" >> .env
+          cat .env
 
       - name: Install dependencies
         run: flutter pub get
