@@ -1,5 +1,6 @@
 import 'package:demo/colors/custom_palette.dart';
 import 'package:demo/constants.dart';
+import 'package:demo/screens/all_screens.dart';
 import 'package:demo/screens/language_selection_screen.dart';
 import 'package:demo/screens/prefab.dart';
 
@@ -26,8 +27,12 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
       courses.add(
         InkWell(
           onTap: () {
-            Navigator.of(context).pushNamedAndRemoveUntil(
-                '/LessonSelection/', ModalRoute.withName('/'));
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const LessonSelectionScreen(),
+              ),
+            );
           },
           child: Row(
             children: [
@@ -135,9 +140,11 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                        '/LessonSelection/',
-                        ModalRoute.withName('/'),
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LessonSelectionScreen(),
+                        ),
                       );
                     },
                     child: Row(
