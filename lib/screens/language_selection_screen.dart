@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:demo/colors/custom_palette.dart';
-import 'package:demo/screens/lesson_selection_screen.dart';
 import 'package:demo/screens/register_screen.dart';
 
 import 'package:flutter/material.dart';

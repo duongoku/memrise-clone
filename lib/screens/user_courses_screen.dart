@@ -1,14 +1,9 @@
-import 'dart:developer';
-
 import 'package:demo/colors/custom_palette.dart';
 import 'package:demo/constants.dart';
-import 'package:demo/main.dart';
 import 'package:demo/screens/language_selection_screen.dart';
-import 'package:demo/screens/lesson_selection_screen.dart';
 import 'package:demo/screens/prefab.dart';
 
 import 'package:flutter/material.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class UserCoursesScreen extends StatefulWidget {
   const UserCoursesScreen({super.key});
@@ -21,7 +16,7 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
   double iconSize = 50;
   var userId =
       supabase.auth.currentUser?.id ?? "7b0dc386-e979-49d3-950d-13af79f3389d";
-  var data;
+  dynamic data;
 
   List<Widget> getCoursesFromData(data) {
     List<Widget> courses = [];
