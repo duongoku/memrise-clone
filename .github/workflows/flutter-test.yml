@@ -29,12 +29,10 @@ jobs:
       - name: Create .env file
         run: |
           touch .env
-          cat > .env <<EOF
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
-          TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
-          TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
-          EOF
+          echo "SUPABASE_URL: ${{ secrets.SUPABASE_URL }}\n" >> .env
+          echo "SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}\n" >> .env
+          echo "TEST_EMAIL: ${{ secrets.TEST_EMAIL }}\n" >> .env
+          echo "TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}\n" >> .env
 
       - name: Install dependencies
         run: flutter pub get
