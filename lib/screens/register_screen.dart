@@ -79,8 +79,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
       if (!mounted) return;
       context.showSnackBar(message: successMessage);
     } on AuthException catch (error) {
+      if (!mounted) return;
       context.showErrorSnackBar(message: error.message);
     } catch (error) {
+      if (!mounted) return;
       context.showErrorSnackBar(message: "Unexpected error: $error");
     }
 

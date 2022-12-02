@@ -217,11 +217,15 @@ class _LearnScreenState extends State<LearnScreen> {
     var tempList = List<int>.generate(widget.words.length - 1, (i) => i);
     tempList.remove(selected);
     tempList.shuffle();
-    var options = tempList.sublist(0, 3);
+    var options = tempList;
+    if(tempList.length > 3) {
+      options = tempList.sublist(0, 3);
+    }
     options.insert(position, selected);
 
     return ListView(
       children: [
+        Prefab.vPadding10,
         Center(
           child: SizedBox(
             height: 50,

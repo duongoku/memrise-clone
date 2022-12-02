@@ -1,8 +1,6 @@
 import 'package:demo/colors/custom_palette.dart';
 import 'package:demo/constants.dart';
 import 'package:demo/screens/all_screens.dart';
-import 'package:demo/screens/language_selection_screen.dart';
-import 'package:demo/screens/prefab.dart';
 
 import 'package:flutter/material.dart';
 
