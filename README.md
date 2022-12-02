@@ -37,6 +37,7 @@
   - [Week 7](#week-7)
   - [Week 8](#week-8)
   - [Week 11](#week-11)
+  - [Final](#final)
 - [📢Releases](#releases)
 
 ## 👪Members
@@ -112,6 +113,12 @@ Monkey test
 Video demo:
 
 ![Video demo 11](/preview/week11.gif)
+
+### Final
+
+Code metrics:
+
+![Code metrics](/preview/code_metrics.png)
 
 ## 📢Releases
 
