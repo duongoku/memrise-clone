@@ -41,7 +41,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   child: SizedBox.fromSize(
                     size: const Size.fromRadius(22), // Image radius
                     child: Image.asset(
-                      "images/${user["avatar_url"]}",
+                      "assets/images/${user["avatar_url"]}",
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -130,7 +130,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                               child: SizedBox.fromSize(
                                 size: const Size.fromRadius(50), // Image radius
                                 child: Image.asset(
-                                  "images/${currentUser["avatar_url"]}",
+                                  "assets/images/${currentUser["avatar_url"]}",
                                   fit: BoxFit.cover,
                                 ),
                               ),
