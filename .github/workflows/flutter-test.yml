@@ -29,10 +29,10 @@ jobs:
       - name: Create .env file
         run: |
           touch .env
-          echo "SUPABASE_URL: ${{ secrets.SUPABASE_URL }}" >> .env
-          echo "SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}" >> .env
-          echo "TEST_EMAIL: ${{ secrets.TEST_EMAIL }}" >> .env
-          echo "TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}" >> .env
+          echo "SUPABASE_URL=\"${{ secrets.SUPABASE_URL }}\"" >> .env
+          echo "SUPABASE_ANON_KEY=\"${{ secrets.SUPABASE_ANON_KEY }}\"" >> .env
+          echo "TEST_EMAIL=\"${{ secrets.TEST_EMAIL }}\"" >> .env
+          echo "TEST_PASSWORD=\"${{ secrets.TEST_PASSWORD }}\"" >> .env
           cat .env
 
       - name: Install dependencies
