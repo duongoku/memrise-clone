@@ -1,10 +1,12 @@
 import 'dart:convert';
 
 import 'package:demo/colors/custom_palette.dart';
+import 'package:demo/screens/all_screens.dart';
 import 'package:demo/screens/register_screen.dart';
-
+import 'package:demo/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<List> loadLanguages() async {
   final String jsonString =
@@ -22,6 +24,7 @@ class LanguageSelectionScreen extends StatefulWidget {
 
 class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
   static var languages = <String>["English"];
+  final userId = supabase.auth.currentUser?.id;
 
   String selectedLanguage = "English";
 
@@ -38,6 +41,22 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
         selectedLanguage = languages[0];
       });
     });
+  }
+
+  updateUserCourses(language) async {
+    var user =
+        await supabase.from("profiles").select().eq("id", userId).single();
+    String currentCourse = user["courses"]["currentCourse"];
+    List otherCourses = user["courses"]["otherCourses"];
+
+    if (currentCourse != language && otherCourses.indexOf(language) == -1) {
+      otherCourses.add(currentCourse);
+      currentCourse = language;
+
+      user["courses"]["currentCourse"] = currentCourse;
+      user["courses"]["otherCourses"] = otherCourses;
+      await supabase.from("profiles").upsert(user);
+    }
   }
 
   @override
@@ -111,14 +130,24 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                     child: TextButton(
                       child: Text(language, style: whiteText),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const RegisterScreen(
-                              isRegistering: true,
+                        if (supabase.auth.currentUser == null) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const RegisterScreen(
+                                isRegistering: true,
+                              ),
                             ),
-                          ),
-                        );
+                          );
+                        } else {
+                          updateUserCourses(language);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const LessonSelectionScreen()),
+                          );
+                        }
                       },
                     ),
                   ),
