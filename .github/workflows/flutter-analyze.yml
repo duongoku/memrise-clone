@@ -2,20 +2,36 @@ name: Lint
 
 on:
   push:
-    branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
 
 jobs:
   analyze:
     runs-on: ubuntu-latest
+    environment: duongoku
 
-    steps:
+    steps:        
       - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.0.5'
           channel: 'master'
-      - name: Analyze source code
+
+      - name: Create .env file
+        run: |
+          touch .env
+          cat > .env <<EOF
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
+          TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+          EOF
+
+      - name: Install dependencies
+        run: flutter pub get
+        
+      - name: Analyze source code with flutter analyzer
         run: flutter analyze
-      
+
+      - name: Analyze source code with dart_code_metrics
+        run: flutter pub run dart_code_metrics:metrics --reporter=github lib

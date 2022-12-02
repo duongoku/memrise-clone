@@ -2,13 +2,18 @@ name: Test
 
 on:
   push:
-    branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        api-level:
+          - 29
+      fail-fast: true
+    environment: duongoku
 
     steps:
       - uses: actions/checkout@v3
@@ -16,7 +21,32 @@ jobs:
         with:
           flutter-version: '3.0.5'
           channel: 'master'
-      - name: Run tests
-        run: flutter test --coverage
-      - uses: codecov/codecov-action@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'oracle'
+          java-version: '17'
+          
+      - name: Create .env file
+        run: |
+          touch .env
+          cat > .env <<EOF
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
+          TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+          EOF
+
+      - name: Install dependencies
+        run: flutter pub get
+      
+      - name: Run integration tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ matrix.api-level }}
+          arch: x86_64
+          profile: Nexus 6
+          script: flutter test integration_test --coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
       

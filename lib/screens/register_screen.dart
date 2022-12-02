@@ -4,7 +4,6 @@ import 'package:demo/colors/custom_palette.dart';
 import 'package:demo/constants.dart';
 import 'package:demo/screens/lesson_selection_screen.dart';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 

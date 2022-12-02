@@ -2,13 +2,13 @@ name: Build
 
 on:
   push:
-    branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: duongoku
 
     steps:
       - uses: actions/checkout@v3
@@ -16,6 +16,20 @@ jobs:
         with:
           flutter-version: '3.0.5'
           channel: 'master'
+          
+      - name: Create .env file
+        run: |
+          touch .env
+          cat > .env <<EOF
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
+          TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+          EOF
+      
+      - name: Install dependencies
+        run: flutter pub get
+
       - name: Build apk
         run: flutter build apk --release
       
