@@ -2,11 +2,10 @@ import 'dart:convert';
 
 import 'package:demo/colors/custom_palette.dart';
 import 'package:demo/screens/all_screens.dart';
-import 'package:demo/screens/register_screen.dart';
+
 import 'package:demo/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<List> loadLanguages() async {
   final String jsonString =
@@ -49,7 +48,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
     String currentCourse = user["courses"]["currentCourse"];
     List otherCourses = user["courses"]["otherCourses"];
 
-    if (currentCourse != language && otherCourses.indexOf(language) == -1) {
+    if (currentCourse != language && !otherCourses.contains(language)) {
       otherCourses.add(currentCourse);
       currentCourse = language;
 
