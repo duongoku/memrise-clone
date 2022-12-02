@@ -204,17 +204,20 @@ class TestApp {
         await tester.pumpWidget(testWidget);
         await tester.pumpAndSettle();
         await tester.tap(find.byType(IconButton).first);
+        await tester.pumpAndSettle();
       });
       testWidgets('Test learn a new course button', (tester) async {
         await tester.pumpWidget(testWidget);
         await tester.pumpAndSettle();
         await tester.tap(find.byType(ElevatedButton).first);
+        await tester.pumpAndSettle();
       });
 
       testWidgets('Test courses', (tester) async {
         await tester.pumpWidget(testWidget);
         await tester.pumpAndSettle();
         await tester.tap(find.byType(InkWell).first);
+        await tester.pumpAndSettle();
       });
     });
 
@@ -303,31 +306,37 @@ class TestApp {
                 "dstLang": "en",
                 "lesson": 1,
               },
-              {
-                "id": 5,
-                "videoUrl":
-                    "https://duongoku.github.io/archive/2022/MemriseClone/videos/cava.mp4",
-                "phrase": "cava3",
-                "meaning": "sup",
-                "srcLang": "fr",
-                "dstLang": "en",
-                "lesson": 1,
-              }
             ],
           ),
         ),
       );
 
-      testWidgets('Test back button', (tester) async {
+      testWidgets('Test exit button', (tester) async {
         await tester.pumpWidget(testWidget);
         await tester.pumpAndSettle();
         await tester.tap(find.byType(IconButton).first);
+        await tester.pumpAndSettle();
+        await tester.tap(find.text("CANCEL").first);
+        await tester.pumpAndSettle();
+        await tester.tap(find.byType(IconButton).first);
+        await tester.pumpAndSettle();
+        await tester.tap(find.text("YES").first);
+        await tester.pumpAndSettle();
       });
 
       testWidgets('Test OK button', (tester) async {
         await tester.pumpWidget(testWidget);
         await tester.pumpAndSettle();
-        await tester.tap(find.byType(CustomElevatedButton).first);
+        for (var i = 0; i < 4; i++) {
+          await tester.drag(find.byType(ListView), const Offset(0.0, -300.0));
+          await tester.pumpAndSettle();
+          await tester.tap(find.text("Ok, got it").first);
+          await tester.pumpAndSettle();
+        }
+        await tester.tap(find.byType(ElevatedButton).first);
+        await tester.pumpAndSettle();
+        await tester.tap(find.text("GO BACK").first);
+        await tester.pumpAndSettle();
       });
     });
 
@@ -358,6 +367,13 @@ class TestApp {
         await tester.pumpWidget(testWidget);
         await tester.pumpAndSettle();
         await tester.tap(find.byType(Card).first);
+        await tester.pumpAndSettle();
+      });
+
+      testWidgets('Test learn button', (tester) async {
+        await tester.pumpWidget(testWidget);
+        await tester.pumpAndSettle();
+        await tester.tap(find.text("Learn").first);
         await tester.pumpAndSettle();
       });
     });
