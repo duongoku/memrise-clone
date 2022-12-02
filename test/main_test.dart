@@ -295,18 +295,22 @@ class TestApp {
       Widget testWidget = const MediaQuery(
         data: MediaQueryData(),
         child: MaterialApp(
-          home: WordListScreen(words: [
-            {
-              "id": 1,
-              "videoUrl":
-                  "https://duongoku.github.io/archive/2022/MemriseClone/videos/cava.mp4",
-              "phrase": "cava",
-              "meaning": "cava",
-              "srcLang": "fr",
-              "dstLang": "en",
-              "lesson": 1,
-            }
-          ], lesson: "Mock lesson"),
+          home: WordListScreen(
+            words: [
+              {
+                "id": 1,
+                "videoUrl":
+                    "https://duongoku.github.io/archive/2022/MemriseClone/videos/cava.mp4",
+                "phrase": "cava",
+                "meaning": "cava",
+                "srcLang": "fr",
+                "dstLang": "en",
+                "lesson": 1,
+              }
+            ],
+            lesson: "Mock lesson",
+            lessonId: 1,
+          ),
         ),
       );
 

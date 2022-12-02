@@ -8,8 +8,14 @@ import 'package:flutter/material.dart';
 class WordListScreen extends StatefulWidget {
   final dynamic words;
   final String lesson;
+  final int lessonId;
 
-  const WordListScreen({super.key, required this.words, required this.lesson});
+  const WordListScreen({
+    super.key,
+    required this.words,
+    required this.lesson,
+    required this.lessonId,
+  });
 
   @override
   State<WordListScreen> createState() => _WordListScreenState();
@@ -20,8 +26,12 @@ class _WordListScreenState extends State<WordListScreen> {
   static const learnButtonWidth = 165.0;
 
   Future<void> toLearnScreen() async {
-    // TODO: Select from phrases where lesson = lessonId
-    supabase.from("phrases").select("*").then((rows) {
+    supabase
+        .from("phrases")
+        .select("*")
+        .eq("lesson", widget.lessonId)
+        .order("order", ascending: true)
+        .then((rows) {
       Navigator.push(
         context,
         MaterialPageRoute(

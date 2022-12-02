@@ -57,6 +57,7 @@ class _LessonSelectionScreenState extends State<LessonSelectionScreen> {
           builder: (context) => WordListScreen(
             words: rows,
             lesson: lesson,
+            lessonId: lessonId,
           ),
         ),
       );
