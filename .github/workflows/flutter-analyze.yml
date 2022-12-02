@@ -10,6 +10,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Create .env file
+        uses: SpicyPizza/create-envfile@v1.3.0
+        with:
+          envkey_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          envkey_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          envkey_TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
+          envkey_TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+        
       - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2
         with:
