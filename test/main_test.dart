@@ -84,9 +84,49 @@ class TestApp {
               {
                 "id": 1,
                 "videoUrl":
+                    "https://duongoku.github.io/archive/2022/MemriseClone/videos/salut.mp4",
+                "phrase": "salut",
+                "meaning": "hello",
+                "srcLang": "fr",
+                "dstLang": "en",
+                "lesson": 1,
+              },
+              {
+                "id": 2,
+                "videoUrl":
                     "https://duongoku.github.io/archive/2022/MemriseClone/videos/cava.mp4",
                 "phrase": "cava",
-                "meaning": "cava",
+                "meaning": "how are you?",
+                "srcLang": "fr",
+                "dstLang": "en",
+                "lesson": 1,
+              },
+              {
+                "id": 3,
+                "videoUrl":
+                    "https://duongoku.github.io/archive/2022/MemriseClone/videos/cava.mp4",
+                "phrase": "cava1",
+                "meaning": "how are you bro?",
+                "srcLang": "fr",
+                "dstLang": "en",
+                "lesson": 1,
+              },
+              {
+                "id": 4,
+                "videoUrl":
+                    "https://duongoku.github.io/archive/2022/MemriseClone/videos/cava.mp4",
+                "phrase": "cava2",
+                "meaning": "how are you bruh?",
+                "srcLang": "fr",
+                "dstLang": "en",
+                "lesson": 1,
+              },
+              {
+                "id": 5,
+                "videoUrl":
+                    "https://duongoku.github.io/archive/2022/MemriseClone/videos/cava.mp4",
+                "phrase": "cava3",
+                "meaning": "sup",
                 "srcLang": "fr",
                 "dstLang": "en",
                 "lesson": 1,
@@ -104,10 +144,10 @@ class TestApp {
         await tester.pumpAndSettle();
       });
 
-      testWidgets('Test OK button', (tester) async {
+      testWidgets('Test swipe left', (tester) async {
         await tester.pumpWidget(testWidget);
         await tester.pumpAndSettle();
-        await tester.tap(find.byType(CustomElevatedButton).last);
+        await tester.drag(find.byType(PageView), const Offset(-500, 0));
         await tester.pumpAndSettle();
       });
     });

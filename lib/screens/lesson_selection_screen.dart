@@ -40,27 +40,31 @@ class _LessonSelectionScreenState extends State<LessonSelectionScreen> {
   Future<void> toLearnScreen() async {
     // TODO: Select from phrases where lesson = lessonId
     supabase.from("phrases").select("*").then((rows) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => LearnScreen(words: rows),
-        ),
-      );
+      if (mounted) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LearnScreen(words: rows),
+          ),
+        );
+      }
     });
   }
 
   Future<void> toWordListScreen(int lessonId, String lesson) async {
     supabase.from("phrases").select("*").eq("lesson", lessonId).then((rows) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => WordListScreen(
-            words: rows,
-            lesson: lesson,
-            lessonId: lessonId,
+      if (mounted) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => WordListScreen(
+              words: rows,
+              lesson: lesson,
+              lessonId: lessonId,
+            ),
           ),
-        ),
-      );
+        );
+      }
     });
   }
 
@@ -102,19 +106,19 @@ class _LessonSelectionScreenState extends State<LessonSelectionScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-            icon: const Icon(
-              Icons.menu,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const UserCoursesScreen(),
-                ),
-              );
-            },
+          icon: const Icon(
+            Icons.menu,
+            color: Colors.white,
           ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const UserCoursesScreen(),
+              ),
+            );
+          },
+        ),
         actions: <Widget>[
           IconButton(
             icon: const Icon(
