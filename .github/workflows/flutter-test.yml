@@ -7,7 +7,12 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        api-level:
+          - 29
+      fail-fast: true
     environment: duongoku
 
     steps:
@@ -16,7 +21,11 @@ jobs:
         with:
           flutter-version: '3.0.5'
           channel: 'master'
-
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'oracle'
+          java-version: '17'
+          
       - name: Create .env file
         run: |
           touch .env
@@ -29,9 +38,14 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
-        
-      - name: Run tests
-        run: flutter test --coverage
+      
+      - name: Run integration tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ matrix.api-level }}
+          arch: x86_64
+          profile: Nexus 6
+          script: flutter test integration_test --coverage
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
