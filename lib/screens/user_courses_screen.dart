@@ -114,9 +114,9 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
         ],
       ),
       body: FutureBuilder(
-          future: supabase.from("profiles").select().eq("id", userId).execute(),
+          future: supabase.from("profiles").select().eq("id", userId),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (!snapshot.hasData) {
+            if (snapshot.connectionState != ConnectionState.done) {
               return const Center(
                 child: Text(
                   'Please wait, its loading...',
@@ -124,7 +124,7 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
                 ),
               );
             } else {
-              data = snapshot.data.data[0]["courses"];
+              data = snapshot.data[0]["courses"];
               return ListView(
                 padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
                 children: [
@@ -138,7 +138,9 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
                   InkWell(
                     onTap: () {
                       Navigator.of(context).pushNamedAndRemoveUntil(
-                          '/LessonSelection/', ModalRoute.withName('/'));
+                        '/LessonSelection/',
+                        ModalRoute.withName('/'),
+                      );
                     },
                     child: Row(
                       children: [

@@ -22,8 +22,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     int index = 0;
     for (Map user in data) {
       index++;
-      
-      Color bgColor = (userId == user["id"]) ? Colors.blueGrey.shade400 : Colors.blueGrey.shade700;
+
+      Color bgColor = (userId == user["id"])
+          ? Colors.blueGrey.shade400
+          : Colors.blueGrey.shade700;
       users.add(Container(
         color: bgColor,
         child: Padding(
@@ -104,10 +106,9 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           future: supabase
               .from("profiles")
               .select()
-              .order("experience_point", ascending: false)
-              .execute(),
+              .order("experience_point", ascending: false),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (!snapshot.hasData) {
+            if (snapshot.connectionState != ConnectionState.done) {
               return const Center(
                 child: Text(
                   'Please wait, its loading...',
@@ -115,7 +116,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 ),
               );
             } else {
-              var users = snapshot.data.data;
+              var users = snapshot.data;
               var currentUser = getCurrentUser(users);
               num level = currentUser["experience_point"] ~/ 500;
               double levelProgress =
@@ -244,9 +245,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   ),
                   Expanded(
                     child: ListView(
-                      children: [
-                        ...getLeaderBoard(users)
-                      ],
+                      children: [...getLeaderBoard(users)],
                     ),
                   )
                 ],
