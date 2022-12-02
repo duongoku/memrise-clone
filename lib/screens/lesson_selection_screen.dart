@@ -1,6 +1,6 @@
 import 'package:demo/colors/custom_palette.dart';
 import 'package:demo/constants.dart';
-import 'package:demo/screens/new_phrase.dart';
+import 'package:demo/screens/learn_screen.dart';
 import 'package:demo/screens/user_courses_screen.dart';
 import 'package:demo/screens/user_profile_screen.dart';
 import 'package:demo/screens/word_list_screen.dart';
@@ -38,12 +38,12 @@ class _LessonSelectionScreenState extends State<LessonSelectionScreen> {
   );
 
   Future<void> toLearnScreen() async {
+    // TODO: Select from phrases where lesson = lessonId
     supabase.from("phrases").select("*").then((rows) {
       Navigator.push(
         context,
         MaterialPageRoute(
-          //TODO: Change route to learnscreen
-          builder: (context) => NewPhrase(words: rows, currentWordIndex: 0),
+          builder: (context) => LearnScreen(words: rows),
         ),
       );
     });

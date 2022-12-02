@@ -220,7 +220,62 @@ class TestApp {
     group('Learn screen', () {
       Widget testWidget = const MediaQuery(
         data: MediaQueryData(),
-        child: MaterialApp(home: LearnScreen()),
+        child: MaterialApp(
+          home: LearnScreen(
+            words: [
+              {
+                "id": 1,
+                "videoUrl":
+                    "https://duongoku.github.io/archive/2022/MemriseClone/videos/salut.mp4",
+                "phrase": "salut",
+                "meaning": "hello",
+                "srcLang": "fr",
+                "dstLang": "en",
+                "lesson": 1,
+              },
+              {
+                "id": 2,
+                "videoUrl":
+                    "https://duongoku.github.io/archive/2022/MemriseClone/videos/cava.mp4",
+                "phrase": "cava",
+                "meaning": "how are you?",
+                "srcLang": "fr",
+                "dstLang": "en",
+                "lesson": 1,
+              },
+              {
+                "id": 3,
+                "videoUrl":
+                    "https://duongoku.github.io/archive/2022/MemriseClone/videos/cava.mp4",
+                "phrase": "cava1",
+                "meaning": "how are you bro?",
+                "srcLang": "fr",
+                "dstLang": "en",
+                "lesson": 1,
+              },
+              {
+                "id": 4,
+                "videoUrl":
+                    "https://duongoku.github.io/archive/2022/MemriseClone/videos/cava.mp4",
+                "phrase": "cava2",
+                "meaning": "how are you bruh?",
+                "srcLang": "fr",
+                "dstLang": "en",
+                "lesson": 1,
+              },
+              {
+                "id": 5,
+                "videoUrl":
+                    "https://duongoku.github.io/archive/2022/MemriseClone/videos/cava.mp4",
+                "phrase": "cava3",
+                "meaning": "sup",
+                "srcLang": "fr",
+                "dstLang": "en",
+                "lesson": 1,
+              }
+            ],
+          ),
+        ),
       );
 
       testWidgets('Test back button', (tester) async {

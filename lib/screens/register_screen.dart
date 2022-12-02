@@ -192,9 +192,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           alignment: Alignment.center,
                           child: TextButton(
                             onPressed: (() {
-                              if (kDebugMode) {
-                                print('Redirecting to login');
-                              }
+                              Navigator.push(context, MaterialPageRoute(
+                                builder: (context) {
+                                  return const RegisterScreen(isRegistering: false);
+                                },
+                              ));
                             }),
                             child: const Text(
                               'Already have an account? Login now!',
