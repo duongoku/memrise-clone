@@ -13,7 +13,8 @@ jobs:
     steps:
       - name: Create .env file
         run: |
-          cat > assets/.env <<EOF
+          touch .env
+          cat > .env <<EOF
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
           TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
