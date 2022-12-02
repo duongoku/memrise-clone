@@ -1,8 +1,9 @@
 import 'dart:math';
 
 import 'package:demo/colors/custom_palette.dart';
-import 'package:demo/screens/language_selection_screen.dart';
+import 'package:demo/constants.dart';
 import 'package:demo/screens/prefab.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
@@ -46,7 +47,7 @@ class _LearnScreenState extends State<LearnScreen> {
   static const congratsImageWidth = 200.0;
 
   late VideoPlayerController videoController;
-  var score = 0; // TODO: Update to database
+  var score = 0;
   var current = 0;
   var streak = 0;
   var isQuestion = false;
@@ -114,7 +115,6 @@ class _LearnScreenState extends State<LearnScreen> {
     );
   }
 
-  // TODO: implements question screen
   void toNextWord(int choice) {
     videoController.dispose();
     setState(
@@ -266,7 +266,25 @@ class _LearnScreenState extends State<LearnScreen> {
     );
   }
 
+  Future<void> updateScoreToDB() async {
+    try {
+      final userId = supabase.auth.currentUser!.id;
+      final userData = await supabase
+          .from("profiles")
+          .select()
+          .eq("id", userId)
+          .single() as Map;
+      userData["experience_point"] += score;
+      await supabase.from("profiles").upsert(userData);
+    } catch (e) {
+      if (kDebugMode) {
+        print("Unexpected exception occurred when updating score");
+      }
+    }
+  }
+
   Widget widgetForFinalResult() {
+    updateScoreToDB();
     return ListView(
       children: [
         Prefab.vPadding15,
