@@ -32,25 +32,29 @@ class _WordListScreenState extends State<WordListScreen> {
         .eq("lesson", widget.lessonId)
         .order("order", ascending: true)
         .then((rows) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => LearnScreen(words: rows),
-        ),
-      );
+      if (mounted) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LearnScreen(words: rows),
+          ),
+        );
+      }
     });
   }
 
   Future<void> toNewPhraseScreen(dynamic words, int index) async {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => NewPhrase(
-          words: words,
-          currentWordIndex: index,
+    if (mounted) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => NewPhrase(
+            words: words,
+            currentWordIndex: index,
+          ),
         ),
-      ),
-    );
+      );
+    }
   }
 
   @override

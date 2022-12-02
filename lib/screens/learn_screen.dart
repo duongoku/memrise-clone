@@ -214,13 +214,11 @@ class _LearnScreenState extends State<LearnScreen> {
     // A random number from 0 to 3
     var position = random.nextInt(4);
     // 3 different numbers from 0 to widget.words.length - 1, excluding selected
-    var tempList = List<int>.generate(widget.words.length - 1, (i) => i);
+    var tempList = List<int>.generate(widget.words.length, (i) => i);
     tempList.remove(selected);
     tempList.shuffle();
     var options = tempList;
-    if(tempList.length > 3) {
-      options = tempList.sublist(0, 3);
-    }
+    tempList.sublist(0, 3);
     options.insert(position, selected);
 
     return ListView(
