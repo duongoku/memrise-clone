@@ -335,8 +335,8 @@ class TestApp {
         }
         await tester.tap(find.byType(ElevatedButton).first);
         await tester.pumpAndSettle();
-        await tester.tap(find.text("GO BACK").first);
-        await tester.pumpAndSettle();
+        // await tester.tap(find.text("GO BACK").first);
+        // await tester.pumpAndSettle();
       });
     });
 
