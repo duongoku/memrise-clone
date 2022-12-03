@@ -286,7 +286,6 @@ class _LearnScreenState extends State<LearnScreen> {
   }
 
   Widget widgetForFinalResult() {
-    updateScoreToDB();
     return ListView(
       children: [
         Prefab.vPadding15,
@@ -387,6 +386,7 @@ class _LearnScreenState extends State<LearnScreen> {
 
   @override
   void dispose() {
+    updateScoreToDB();
     super.dispose();
     videoController.dispose();
   }
