@@ -335,6 +335,8 @@ class TestApp {
         }
         await tester.tap(find.byType(ElevatedButton).first);
         await tester.pumpAndSettle();
+        await tester.drag(find.byType(ListView), const Offset(0.0, -300.0));
+        await tester.pumpAndSettle();
         await tester.tap(find.text("GO BACK").first);
         await tester.pumpAndSettle();
       });
