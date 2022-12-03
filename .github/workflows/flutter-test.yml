@@ -34,7 +34,6 @@ jobs:
           echo "TEST_EMAIL=\"${{ secrets.TEST_EMAIL }}\"" >> .env
           echo "TEST_PASSWORD=\"${{ secrets.TEST_PASSWORD }}\"" >> .env
           cat .env
-          avdmanager list device
 
       - name: Install dependencies
         run: flutter pub get
@@ -44,7 +43,7 @@ jobs:
         with:
           api-level: ${{ matrix.api-level }}
           arch: x86_64
-          profile: Nexus 6
+          profile: Pixel 4 XL
           script: flutter test integration_test --coverage
 
       - name: Upload coverage to Codecov
