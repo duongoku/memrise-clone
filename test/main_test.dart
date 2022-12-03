@@ -221,45 +221,6 @@ class TestApp {
       });
     });
 
-    group('Register screen', () {
-      Widget testWidget = const MediaQuery(
-        data: MediaQueryData(),
-        child: MaterialApp(
-            home: RegisterScreen(
-          isRegistering: true,
-        )),
-      );
-
-      testWidgets('Test redirect button', (tester) async {
-        await tester.pumpWidget(testWidget);
-        await tester.pumpAndSettle();
-        await tester.tap(find.byType(TextButton).first);
-        await tester.pumpAndSettle();
-      });
-
-      testWidgets('Test register button', (tester) async {
-        await tester.pumpWidget(testWidget);
-        await tester.pumpAndSettle();
-        var result = find.text('Register');
-        expect(result, findsOneWidget);
-        await tester.tap(result);
-        await tester.pumpAndSettle();
-      });
-    });
-
-    group('Sign in selection screen', () {
-      Widget testWidget = const MediaQuery(
-        data: MediaQueryData(),
-        child: MaterialApp(home: SignInSelectionScreen()),
-      );
-
-      testWidgets('Test signin buttons', (tester) async {
-        await tester.pumpWidget(testWidget);
-        await tester.pumpAndSettle();
-        await tester.tap(find.byType(SignInButton).first);
-      });
-    });
-
     group('Learn screen', () {
       Widget testWidget = const MediaQuery(
         data: MediaQueryData(),
@@ -375,6 +336,45 @@ class TestApp {
         await tester.pumpAndSettle();
         await tester.tap(find.text("Learn").first);
         await tester.pumpAndSettle();
+      });
+    });
+
+    group('Register screen', () {
+      Widget testWidget = const MediaQuery(
+        data: MediaQueryData(),
+        child: MaterialApp(
+            home: RegisterScreen(
+          isRegistering: true,
+        )),
+      );
+
+      testWidgets('Test redirect button', (tester) async {
+        await tester.pumpWidget(testWidget);
+        await tester.pumpAndSettle();
+        await tester.tap(find.byType(TextButton).first);
+        await tester.pumpAndSettle();
+      });
+
+      testWidgets('Test register button', (tester) async {
+        await tester.pumpWidget(testWidget);
+        await tester.pumpAndSettle();
+        var result = find.text('Register');
+        expect(result, findsOneWidget);
+        await tester.tap(result);
+        await tester.pumpAndSettle();
+      });
+    });
+
+    group('Sign in selection screen', () {
+      Widget testWidget = const MediaQuery(
+        data: MediaQueryData(),
+        child: MaterialApp(home: SignInSelectionScreen()),
+      );
+
+      testWidgets('Test signin buttons', (tester) async {
+        await tester.pumpWidget(testWidget);
+        await tester.pumpAndSettle();
+        await tester.tap(find.byType(SignInButton).first);
       });
     });
   }
