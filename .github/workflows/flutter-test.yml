@@ -43,7 +43,7 @@ jobs:
         with:
           api-level: ${{ matrix.api-level }}
           arch: x86_64
-          profile: Pixel 4 XL
+          profile: Nexus 6
           script: flutter test integration_test --coverage
 
       - name: Upload coverage to Codecov

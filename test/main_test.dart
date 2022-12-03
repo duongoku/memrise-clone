@@ -287,10 +287,6 @@ class TestApp {
 
       testWidgets('Test OK button', (tester) async {
         await tester.pumpWidget(testWidget);
-        await supabase.auth.signInWithPassword(
-          email: dotenv.env['TEST_EMAIL']!,
-          password: dotenv.env['TEST_PASSWORD']!,
-        );
         await tester.pumpAndSettle();
         for (var i = 0; i < 4; i++) {
           await tester.drag(find.byType(ListView), const Offset(0.0, -300.0));
@@ -300,7 +296,9 @@ class TestApp {
         }
         await tester.tap(find.byType(ElevatedButton).first);
         await tester.pumpAndSettle();
-        await tester.tap(find.byType(CustomElevatedButton).first);
+        await tester.drag(find.byType(ListView), const Offset(0.0, -300.0));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text("GO BACK").first);
         await tester.pumpAndSettle();
       });
     });
