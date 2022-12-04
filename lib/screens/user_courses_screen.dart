@@ -17,14 +17,30 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
       supabase.auth.currentUser?.id ?? "7b0dc386-e979-49d3-950d-13af79f3389d";
   dynamic data;
 
-  List<Widget> getCoursesFromData(data) {
+  updateUserCourses(language, user) async {
+    String currentCourse = user["courses"]["currentCourse"];
+    List otherCourses = user["courses"]["otherCourses"];
+
+    
+      otherCourses.add(currentCourse);
+      otherCourses.remove(language);
+      currentCourse = language;
+
+      user["courses"]["currentCourse"] = currentCourse;
+      user["courses"]["otherCourses"] = otherCourses;
+      await supabase.from("profiles").upsert(user);
+    
+  }
+
+  List<Widget> getCoursesFromData(otherCourses, userData) {
     List<Widget> courses = [];
 
-    for (String course in data) {
+    for (String course in otherCourses) {
       courses.add(Prefab.vPadding20);
       courses.add(
         InkWell(
           onTap: () {
+            updateUserCourses(course, userData);
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -175,7 +191,8 @@ class _UserCoursesScreenState extends State<UserCoursesScreen> {
                       'OTHER COURSES',
                       style: TextStyle(color: Colors.grey, fontSize: 18),
                     ),
-                    ...getCoursesFromData(data["otherCourses"])
+                    ...getCoursesFromData(
+                        data["otherCourses"], snapshot.data[0])
                   ],
                 ],
               );
