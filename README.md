@@ -120,6 +120,10 @@ Code metrics:
 
 ![Code metrics](/preview/code_metrics.png)
 
+Final Preview:
+
+![Final Preview](/preview/preview_final.gif)
+
 ## 📢Releases
 
 -   Checkout [releases](https://github.com/duongoku/random-flutter/releases)
